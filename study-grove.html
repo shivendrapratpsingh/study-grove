@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Grove ✨ — Crack SSC · Banking · Railways · Govt Exams</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --gold:        #E8B86D;
+  --gold-light:  #F5D99A;
+  --gold-dark:   #C4883A;
+  --green:       #7BAE7F;
+  --green-dark:  #4A7C59;
+  --sky:         #F0E6D3;
+  --cream:       #FFF8EC;
+  --brown:       #5C3D2E;
+  --text:        #3D2B1F;
+  --text-light:  #7A5C45;
+  --shadow:      rgba(90,60,20,0.14);
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #FDF5E4;
+}
+
+/* ── Animated Background ── */
+.bg-canvas {
+  position: fixed; inset: 0; z-index: -2;
+  background: linear-gradient(160deg,#FFF5D4 0%,#FFE8A0 35%,#E8CF7A 65%,#C8DDA0 100%);
+}
+.bg-clouds {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  overflow: hidden;
+}
+.cloud {
+  position: absolute;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.45);
+  filter: blur(6px);
+  animation: driftCloud linear infinite;
+}
+@keyframes driftCloud {
+  from { transform: translateX(-200px); }
+  to   { transform: translateX(110vw); }
+}
+
+/* Floating leaves */
+.leaf {
+  position: fixed; pointer-events: none;
+  animation: floatLeaf linear infinite;
+  z-index: 0; user-select: none;
+}
+@keyframes floatLeaf {
+  0%   { transform: translateY(-30px) rotate(0deg);   opacity: 0; }
+  8%   { opacity: 0.45; }
+  92%  { opacity: 0.2; }
+  100% { transform: translateY(105vh) rotate(400deg); opacity: 0; }
+}
+
+/* ── Pages ── */
+.page { display: none; min-height: 100vh; position: relative; z-index: 1; animation: fadeUp .45s ease; }
+.page.active { display: block; }
+#page-login.active { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(22px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* ═══════════════ LOGIN ═══════════════ */
+.login-wrap {
+  background: rgba(255,248,236,0.94);
+  border-radius: 32px;
+  padding: 50px 44px 44px;
+  max-width: 460px; width: 100%;
+  box-shadow: 0 24px 70px var(--shadow), 0 0 0 3px rgba(232,184,109,.28);
+  text-align: center;
+  backdrop-filter: blur(12px);
+  position: relative; overflow: hidden;
+}
+.login-wrap::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:5px;
+  background: linear-gradient(90deg,var(--gold),var(--green),var(--gold));
+}
+.login-spirit {
+  font-size: 4.5rem;
+  display: inline-block;
+  animation: spiritFloat 3s ease-in-out infinite;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 6px 14px rgba(100,80,20,.25));
+}
+.site-title {
+  font-size: 2.6rem; font-weight: 900; color: var(--brown);
+  text-shadow: 2px 2px 0 rgba(232,184,109,.45);
+}
+.site-sub {
+  font-size: 1rem; color: var(--text-light); font-style: italic;
+  margin-bottom: 30px; margin-top: 4px;
+}
+.form-label { display:block; font-weight:700; color:var(--brown); margin-bottom:8px; font-size:.95rem; text-align:left; }
+.form-input {
+  width:100%; padding:14px 20px;
+  border: 2.5px solid rgba(232,184,109,.38);
+  border-radius: 15px; font-size:1rem;
+  font-family: 'Nunito', sans-serif;
+  background: rgba(255,255,255,.82); color: var(--text);
+  transition: all .3s; outline: none;
+}
+.form-input:focus {
+  border-color: var(--gold); background: #fff;
+  box-shadow: 0 0 0 4px rgba(232,184,109,.18);
+}
+.btn-primary {
+  width:100%; padding:15px; margin-top:6px;
+  background: linear-gradient(135deg,var(--gold),var(--gold-dark));
+  color:#fff; border:none; border-radius:15px;
+  font-size:1.1rem; font-weight:800; font-family:'Nunito',sans-serif;
+  cursor:pointer; transition: all .3s;
+  box-shadow: 0 6px 22px rgba(196,136,58,.4);
+  letter-spacing: .4px;
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(196,136,58,.48); }
+.btn-primary:active { transform: translateY(0); }
+.error-tip { color:#E05A5A; font-size:.88rem; margin-top:10px; font-weight:700; display:none; }
+
+/* ═══════════════ TOP BAR ═══════════════ */
+.top-bar {
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 14px 22px;
+  background: rgba(255,248,236,.92);
+  border-radius: 20px; margin-bottom:28px;
+  box-shadow: 0 4px 18px var(--shadow);
+  backdrop-filter: blur(12px);
+}
+.top-logo { font-size:1.4rem; font-weight:900; color:var(--brown); }
+.user-chip {
+  background: var(--gold-light); color: var(--brown);
+  padding:7px 15px; border-radius:20px;
+  font-size:.88rem; font-weight:700;
+}
+.logout-btn {
+  background:none; border:none; cursor:pointer;
+  color:var(--text-light); font-family:'Nunito',sans-serif;
+  font-size:.88rem; margin-left:10px;
+  transition: color .2s;
+}
+.logout-btn:hover { color:var(--brown); }
+
+/* ═══════════════ SUBJECTS ═══════════════ */
+.welcome-block { text-align:center; margin-bottom:36px; }
+.welcome-block h2 { font-size:2rem; font-weight:900; color:var(--brown); margin-bottom:6px; }
+.welcome-block p  { color:var(--text-light); font-size:1.05rem; }
+
+.subjects-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+  gap:22px; max-width:1200px; margin:0 auto;
+}
+.subject-card {
+  background: rgba(255,248,236,.96);
+  border-radius: 26px; padding:36px 28px;
+  cursor:pointer; text-align:center;
+  transition: all .35s ease;
+  box-shadow: 0 8px 28px var(--shadow);
+  border: 3px solid transparent;
+  position:relative; overflow:hidden;
+}
+.subject-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:6px;
+  background: var(--c);
+}
+.subject-card:hover {
+  transform: translateY(-9px);
+  border-color: var(--c);
+  box-shadow: 0 22px 55px var(--shadow);
+}
+.subject-card:active { transform: translateY(-4px); }
+.subject-icon { font-size:3.4rem; margin-bottom:14px; display:block; }
+.subject-name { font-size:1.45rem; font-weight:900; color:var(--brown); margin-bottom:8px; }
+.subject-desc { font-size:.93rem; color:var(--text-light); line-height:1.55; }
+.subject-pill {
+  display:inline-block; color:#fff;
+  padding:4px 13px; border-radius:20px;
+  font-size:.82rem; font-weight:700; margin-top:15px;
+  background: var(--c);
+}
+
+/* ═══════════════ TEACHERS ═══════════════ */
+.page-header {
+  display:flex; align-items:center; gap:14px;
+  margin-bottom:26px; padding:18px 20px;
+  background: rgba(255,248,236,.92);
+  border-radius:20px;
+  box-shadow:0 4px 16px var(--shadow);
+  backdrop-filter:blur(12px);
+}
+.back-btn {
+  background: var(--gold-light); border:none;
+  padding:9px 18px; border-radius:12px;
+  cursor:pointer; font-size:1rem; font-weight:700;
+  font-family:'Nunito',sans-serif; color:var(--brown);
+  transition: all .2s; flex-shrink:0;
+}
+.back-btn:hover { background:var(--gold); color:#fff; transform:translateX(-3px); }
+.page-title { font-size:1.75rem; font-weight:900; color:var(--brown); }
+.page-sub   { font-size:.88rem; color:var(--text-light); margin-top:2px; }
+
+.teachers-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fill,minmax(290px,1fr));
+  gap:18px; max-width:1200px; margin:0 auto;
+}
+.teacher-card {
+  background: rgba(255,248,236,.96); border-radius:20px;
+  padding:22px 20px; cursor:pointer;
+  transition: all .3s; box-shadow:0 6px 22px var(--shadow);
+  border:2.5px solid transparent;
+  display:flex; align-items:center; gap:18px;
+}
+.teacher-card:hover {
+  transform:translateY(-5px); border-color:var(--gold);
+  box-shadow:0 16px 44px var(--shadow);
+}
+.t-avatar {
+  width:68px; height:68px; border-radius:50%;
+  background: linear-gradient(135deg,var(--gold-light),var(--gold));
+  display:flex; align-items:center; justify-content:center;
+  font-size:2rem; flex-shrink:0;
+  box-shadow:0 4px 16px rgba(232,184,109,.42);
+}
+.t-info h3 { font-size:1.1rem; font-weight:800; color:var(--brown); margin-bottom:4px; }
+.t-info p  { font-size:.88rem; color:var(--text-light); margin-bottom:7px; }
+.t-badge {
+  background:var(--green); color:#fff;
+  padding:3px 10px; border-radius:10px;
+  font-size:.78rem; font-weight:700;
+}
+
+/* ═══════════════ QUOTE BANNER ═══════════════ */
+.quote-banner {
+  background: linear-gradient(135deg, var(--gold-dark), var(--green-dark));
+  border-radius: 20px;
+  padding: 20px 28px;
+  margin-bottom: 26px;
+  text-align: center;
+  box-shadow: 0 8px 28px rgba(90,60,20,.18);
+  position: relative; overflow: hidden;
+}
+.quote-banner::before {
+  content: '❝';
+  position: absolute; top: -8px; left: 16px;
+  font-size: 5rem; color: rgba(255,255,255,.12);
+  font-family: serif; line-height: 1;
+}
+.quote-text {
+  font-size: 1.05rem; font-weight: 700; color: #fff;
+  line-height: 1.6; margin-bottom: 6px;
+  position: relative; z-index: 1;
+}
+.quote-author {
+  font-size: .8rem; color: rgba(255,255,255,.75);
+  font-style: italic;
+}
+.quote-dots {
+  display: flex; justify-content: center; gap: 7px; margin-top: 12px;
+}
+.q-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,.35); cursor: pointer; transition: background .3s;
+}
+.q-dot.active { background: #fff; }
+
+/* ═══════════════ PROGRESS TRACKER ═══════════════ */
+.progress-bar-wrap {
+  background:rgba(255,248,236,.96); border-radius:20px;
+  padding:18px 24px; margin-bottom:22px;
+  box-shadow:0 4px 16px var(--shadow);
+}
+.progress-bar-wrap h4 { font-size:.92rem; font-weight:800; color:var(--brown); margin-bottom:10px; }
+.progress-subjects { display:flex; flex-direction:column; gap:9px; }
+.prog-row { display:flex; align-items:center; gap:10px; }
+.prog-label { font-size:.82rem; font-weight:700; color:var(--text-light); width:140px; flex-shrink:0; }
+.prog-track {
+  flex:1; height:12px; background:rgba(232,184,109,.18);
+  border-radius:10px; overflow:hidden;
+}
+.prog-fill {
+  height:100%; border-radius:10px;
+  background:linear-gradient(90deg,var(--gold),var(--green));
+  transition:width .5s ease;
+}
+.prog-pct { font-size:.78rem; font-weight:800; color:var(--brown); width:36px; text-align:right; flex-shrink:0; }
+
+/* topic done checkbox */
+.topic-done-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  margin-top:4px; padding:5px 12px;
+  border-radius:20px; border:2px solid var(--gold);
+  background:transparent; cursor:pointer; font-family:'Nunito',sans-serif;
+  font-size:.78rem; font-weight:700; color:var(--brown);
+  transition:all .22s; flex-shrink:0;
+}
+.topic-done-btn.done {
+  background:var(--green); border-color:var(--green); color:#fff;
+}
+.topic-done-btn:hover { transform:scale(1.05); }
+
+/* overall badge on subjects page */
+.subject-prog {
+  font-size:.78rem; font-weight:700; color:var(--text-light); margin-top:6px;
+}
+
+/* ═══════════════ TOPICS ═══════════════ */
+.topics-wrap { max-width:880px; margin:0 auto; }
+.teacher-hero {
+  background:rgba(255,248,236,.96); border-radius:20px;
+  padding:22px 26px; margin-bottom:22px;
+  display:flex; align-items:center; gap:20px;
+  box-shadow:0 6px 22px var(--shadow);
+}
+.hero-avatar {
+  width:78px; height:78px; border-radius:50%;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));
+  display:flex; align-items:center; justify-content:center;
+  font-size:2.4rem; flex-shrink:0;
+  box-shadow:0 6px 22px rgba(232,184,109,.48);
+}
+.hero-info h2 { font-size:1.5rem; font-weight:900; color:var(--brown); }
+.hero-info p  { font-size:.9rem; color:var(--text-light); margin-top:3px; }
+.hero-badge   { font-size:.82rem; color:var(--green-dark); font-weight:700; margin-top:5px; }
+
+.topic-card {
+  background:rgba(255,248,236,.96); border-radius:18px;
+  margin-bottom:13px; box-shadow:0 4px 16px var(--shadow);
+  overflow:hidden; transition: box-shadow .25s;
+}
+.topic-card:hover { box-shadow:0 8px 28px var(--shadow); }
+.topic-head {
+  padding:18px 22px; cursor:pointer;
+  display:flex; justify-content:space-between; align-items:center;
+  transition:background .2s; user-select:none;
+}
+.topic-head:hover { background:rgba(232,184,109,.1); }
+.topic-head h3 {
+  font-size:1rem; font-weight:700; color:var(--brown);
+  display:flex; align-items:center; gap:10px;
+}
+.topic-arrow {
+  font-size:.85rem; color:var(--gold-dark); font-weight:900;
+  transition:transform .3s;
+}
+.topic-card.open .topic-arrow { transform: rotate(90deg); }
+.topic-links {
+  display:none; padding:0 22px 18px;
+  border-top:2px dashed rgba(232,184,109,.3);
+}
+.topic-card.open .topic-links { display:block; }
+
+.link-item {
+  display:flex; align-items:center; gap:12px;
+  padding:11px 0; border-bottom:1px solid rgba(232,184,109,.2);
+  text-decoration:none; color:var(--text);
+  transition:all .22s; border-radius:4px;
+}
+.link-item:last-child { border-bottom:none; }
+.link-item:hover { color:var(--gold-dark); transform:translateX(5px); }
+.link-dot {
+  width:36px; height:36px; border-radius:10px; flex-shrink:0;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  display:flex; align-items:center; justify-content:center; font-size:.95rem;
+}
+.link-text strong { display:block; font-weight:700; font-size:.93rem; }
+.link-text span   { font-size:.78rem; color:var(--text-light); }
+
+/* ═══════════════ AI SPIRIT ═══════════════ */
+@keyframes spiritFloat {
+  0%,100% { transform:translateY(0); }
+  50%      { transform:translateY(-10px); }
+}
+@keyframes spiritBlink {
+  0%,94%,100% { transform:scaleY(1); }
+  96%          { transform:scaleY(0.08); }
+}
+
+.ai-fab {
+  position:fixed; bottom:28px; right:28px; z-index:1000;
+  cursor:pointer; filter:drop-shadow(0 8px 22px rgba(100,70,10,.28));
+}
+.ai-fab svg { width:72px; height:72px; animation:spiritFloat 3.2s ease-in-out infinite; }
+
+.ai-fab .eye-l, .ai-fab .eye-r { animation:spiritBlink 5s ease-in-out infinite; transform-origin:center; }
+
+.ai-panel {
+  position:fixed; bottom:112px; right:28px;
+  width:370px; max-height:68vh;
+  background:rgba(255,248,236,.97);
+  border-radius:26px;
+  box-shadow:0 22px 65px rgba(90,60,20,.22), 0 0 0 3px rgba(232,184,109,.28);
+  display:none; flex-direction:column; overflow:hidden;
+  z-index:999; backdrop-filter:blur(16px);
+  animation:panelIn .3s ease;
+}
+.ai-panel.open { display:flex; }
+@keyframes panelIn {
+  from { opacity:0; transform:scale(.88) translateY(18px); transform-origin:bottom right; }
+  to   { opacity:1; transform:scale(1) translateY(0); }
+}
+
+.ai-header {
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  padding:16px 18px; display:flex; align-items:center; gap:11px;
+}
+.ai-header-avi { font-size:1.8rem; }
+.ai-header-text h3 { font-size:.98rem; font-weight:800; color:#fff; }
+.ai-header-text p  { font-size:.78rem; color:rgba(255,255,255,.85); }
+.ai-close-btn {
+  margin-left:auto; background:rgba(255,255,255,.22); border:none;
+  color:#fff; width:30px; height:30px; border-radius:50%;
+  cursor:pointer; font-size:.9rem; display:flex; align-items:center; justify-content:center;
+  transition:background .2s;
+}
+.ai-close-btn:hover { background:rgba(255,255,255,.38); }
+
+.ai-msgs {
+  flex:1; overflow-y:auto; padding:14px;
+  display:flex; flex-direction:column; gap:11px;
+}
+.ai-msgs::-webkit-scrollbar { width:5px; }
+.ai-msgs::-webkit-scrollbar-thumb { background:var(--gold-light); border-radius:5px; }
+
+.msg {
+  max-width:92%; padding:12px 15px;
+  border-radius:18px; font-size:.88rem; line-height:1.55;
+}
+.msg.ai {
+  background:linear-gradient(135deg,rgba(232,184,109,.13),rgba(123,174,127,.12));
+  border:1.5px solid rgba(232,184,109,.3);
+  align-self:flex-start; border-bottom-left-radius:5px;
+}
+.msg.user {
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  color:#fff; align-self:flex-end; border-bottom-right-radius:5px;
+}
+.r-teacher { font-weight:800; color:var(--brown); margin-bottom:3px; font-size:.92rem; }
+.r-subject { font-size:.74rem; color:var(--text-light); margin-bottom:6px; }
+.r-link {
+  display:flex; align-items:center; gap:7px; padding:6px 9px;
+  background:rgba(255,255,255,.72); border-radius:10px; margin-top:5px;
+  text-decoration:none; color:var(--brown);
+  font-size:.82rem; font-weight:600; transition:all .2s;
+}
+.r-link:hover { background:var(--gold-light); transform:translateX(3px); }
+.r-pf { opacity:.65; font-size:.72rem; }
+
+.ai-input-row {
+  padding:11px 14px; border-top:2px solid rgba(232,184,109,.2);
+  display:flex; gap:9px;
+}
+.ai-input {
+  flex:1; padding:10px 14px;
+  border:2px solid rgba(232,184,109,.3); border-radius:14px;
+  font-size:.88rem; font-family:'Nunito',sans-serif;
+  outline:none; background:rgba(255,255,255,.82); color:var(--text);
+  transition:border .2s;
+}
+.ai-input:focus { border-color:var(--gold); }
+.ai-send {
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  border:none; width:42px; height:42px; border-radius:12px;
+  cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; transition:transform .2s;
+}
+.ai-send:hover { transform:scale(1.1); }
+
+/* ═══════════════ LANGUAGE TOGGLE ═══════════════ */
+.lang-toggle {
+  display:inline-flex; border-radius:22px; overflow:hidden;
+  border:2px solid rgba(232,184,109,.45);
+  background:rgba(255,248,236,.9);
+  box-shadow:0 2px 10px var(--shadow);
+}
+.lang-btn {
+  padding:6px 14px; border:none; cursor:pointer;
+  font-family:'Nunito',sans-serif; font-size:.82rem; font-weight:800;
+  color:var(--text-light); background:transparent;
+  transition:all .25s; letter-spacing:.3px;
+}
+.lang-btn.active {
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  color:#fff; border-radius:20px;
+}
+.lang-btn:hover:not(.active) { color:var(--brown); }
+
+/* Login page lang toggle */
+.login-lang { position:absolute; top:20px; right:20px; }
+
+/* AI navigation button */
+.ai-nav-btn {
+  display:inline-flex; align-items:center; gap:5px;
+  margin-top:7px; padding:8px 15px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  color:#fff; border:none; border-radius:13px;
+  font-family:'Nunito',sans-serif; font-size:.82rem; font-weight:800;
+  cursor:pointer; transition:all .22s; letter-spacing:.2px;
+  box-shadow:0 3px 12px rgba(196,136,58,.35);
+}
+.ai-nav-btn:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(196,136,58,.45); }
+.ai-nav-btn:active { transform:translateY(0); }
+
+/* ═══════════════ ADMIN PAGE ═══════════════ */
+.admin-badge {
+  background:linear-gradient(135deg,#E05A5A,#C0392B);
+  color:#fff; padding:3px 11px; border-radius:20px;
+  font-size:.74rem; font-weight:800; margin-left:8px;
+  letter-spacing:.4px;
+}
+.admin-nav-btn {
+  background:linear-gradient(135deg,#E05A5A,#C0392B);
+  color:#fff; border:none; padding:7px 15px; border-radius:12px;
+  cursor:pointer; font-family:'Nunito',sans-serif;
+  font-size:.82rem; font-weight:800; margin-left:8px;
+  transition:transform .2s;
+}
+.admin-nav-btn:hover { transform:translateY(-2px); }
+
+.admin-wrap { max-width:1200px; margin:0 auto; padding:20px; }
+.admin-hero {
+  background:linear-gradient(135deg,#C0392B,#922B21);
+  border-radius:26px; padding:30px 36px; margin-bottom:28px;
+  color:#fff; display:flex; align-items:center; gap:20px;
+  box-shadow:0 12px 40px rgba(192,57,43,.35);
+}
+.admin-hero-icon { font-size:3.5rem; }
+.admin-hero h1 { font-size:1.8rem; font-weight:900; margin-bottom:4px; }
+.admin-hero p  { font-size:.92rem; opacity:.85; }
+
+.admin-stats-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:16px; margin-bottom:28px;
+}
+.stat-card {
+  background:rgba(255,248,236,.96); border-radius:18px;
+  padding:20px 18px; text-align:center;
+  box-shadow:0 4px 16px var(--shadow);
+  border-top:4px solid var(--c,var(--gold));
+}
+.stat-card .stat-num { font-size:2.2rem; font-weight:900; color:var(--brown); }
+.stat-card .stat-label { font-size:.82rem; color:var(--text-light); font-weight:700; margin-top:4px; }
+
+.admin-section {
+  background:rgba(255,248,236,.96); border-radius:20px;
+  padding:22px 24px; margin-bottom:20px;
+  box-shadow:0 4px 16px var(--shadow);
+}
+.admin-section h3 {
+  font-size:1.1rem; font-weight:900; color:var(--brown);
+  margin-bottom:16px; padding-bottom:10px;
+  border-bottom:2px dashed rgba(232,184,109,.35);
+}
+
+.admin-subject-row {
+  display:flex; align-items:flex-start; gap:14px;
+  padding:12px 0; border-bottom:1px solid rgba(232,184,109,.18);
+}
+.admin-subject-row:last-child { border-bottom:none; }
+.admin-subj-icon {
+  width:42px; height:42px; border-radius:12px;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.3rem; flex-shrink:0;
+}
+.admin-subj-name { font-weight:800; color:var(--brown); font-size:.95rem; }
+.admin-subj-meta { font-size:.78rem; color:var(--text-light); margin-top:2px; }
+.admin-teachers-list { margin-top:8px; display:flex; flex-wrap:wrap; gap:6px; }
+.admin-teacher-chip {
+  background:rgba(232,184,109,.15); border:1.5px solid rgba(232,184,109,.35);
+  border-radius:20px; padding:3px 10px;
+  font-size:.75rem; font-weight:700; color:var(--brown);
+}
+
+.admin-link-row {
+  display:flex; align-items:center; gap:10px;
+  padding:8px 0; border-bottom:1px solid rgba(232,184,109,.12);
+  font-size:.82rem;
+}
+.admin-link-row:last-child { border-bottom:none; }
+.admin-link-badge {
+  padding:2px 9px; border-radius:10px; font-size:.7rem; font-weight:800;
+  flex-shrink:0; white-space:nowrap;
+}
+.badge-yt   { background:#FF000022; color:#C0392B; border:1.5px solid #FF000033; }
+.badge-sa   { background:#2E7D3222; color:#2E7D32; border:1.5px solid #2E7D3233; }
+.badge-ib   { background:#3B82C422; color:#1A5F99; border:1.5px solid #3B82C433; }
+.admin-link-title { color:var(--brown); font-weight:600; flex:1; }
+.admin-link-title a { color:inherit; text-decoration:none; }
+.admin-link-title a:hover { color:var(--gold-dark); text-decoration:underline; }
+.admin-link-subject { font-size:.7rem; color:var(--text-light); flex-shrink:0; }
+
+.admin-empty { color:var(--text-light); font-style:italic; font-size:.88rem; text-align:center; padding:20px; }
+
+/* ═══════════════ MISC ═══════════════ */
+.pad { padding:20px; }
+@media(max-width:640px){
+  .subjects-grid { grid-template-columns:1fr; }
+  .teachers-grid { grid-template-columns:1fr; }
+  .ai-panel { width:calc(100vw - 36px); right:18px; }
+  .site-title { font-size:2rem; }
+  .login-wrap { padding:36px 24px 32px; }
+  .admin-stats-grid { grid-template-columns:repeat(2,1fr); }
+  .admin-hero { flex-direction:column; text-align:center; padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-canvas"></div>
+<div class="bg-clouds" id="clouds"></div>
+<div id="leaves"></div>
+
+<!-- ══════════════ LOGIN ══════════════ -->
+<div id="page-login" class="page active" style="display:flex">
+
+  <!-- Large spirit SVG on login -->
+  <svg width="120" height="120" viewBox="0 0 100 100" style="animation:spiritFloat 3s ease-in-out infinite;filter:drop-shadow(0 8px 20px rgba(100,70,10,.28));margin-bottom:10px" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="60" rx="26" ry="20" fill="#FFF8EC" stroke="#E8B86D" stroke-width="2"/>
+    <circle  cx="50" cy="36" r="22" fill="#FFF8EC" stroke="#E8B86D" stroke-width="2"/>
+    <circle cx="42" cy="34" r="4" fill="#5C3D2E"/><circle cx="43.5" cy="32.5" r="1.5" fill="white"/>
+    <circle cx="58" cy="34" r="4" fill="#5C3D2E"/><circle cx="59.5" cy="32.5" r="1.5" fill="white"/>
+    <circle cx="35" cy="39" r="3" fill="#FFB0A0" opacity=".55"/>
+    <circle cx="65" cy="39" r="3" fill="#FFB0A0" opacity=".55"/>
+    <path d="M44 41 Q50 47 56 41" stroke="#5C3D2E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="50" cy="14" rx="8" ry="4" fill="#7BAE7F" transform="rotate(-15 50 14)"/>
+    <ellipse cx="56" cy="11" rx="6" ry="3" fill="#4A7C59" transform="rotate(22 56 11)"/>
+    <ellipse cx="44" cy="12" rx="5" ry="2.5" fill="#7BAE7F" transform="rotate(-25 44 12)"/>
+    <ellipse cx="22" cy="57" rx="7" ry="4" fill="#FFF8EC" stroke="#E8B86D" stroke-width="1.5" transform="rotate(-28 22 57)"/>
+    <ellipse cx="78" cy="57" rx="7" ry="4" fill="#FFF8EC" stroke="#E8B86D" stroke-width="1.5" transform="rotate(28 78 57)"/>
+    <circle cx="45" cy="62" r="2" fill="#E8B86D" opacity=".45"/>
+    <circle cx="55" cy="62" r="2" fill="#E8B86D" opacity=".45"/>
+    <circle cx="50" cy="69" r="2" fill="#E8B86D" opacity=".45"/>
+  </svg>
+
+  <!-- Lang toggle on login -->
+  <div class="login-lang">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="login-lang-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn"        id="login-lang-hi" onclick="setLang('hi')">हिं</button>
+    </div>
+  </div>
+
+  <div class="login-wrap">
+    <h1 class="site-title">📚 Study Grove</h1>
+    <p class="site-sub" id="login-sub">SSC · Banking · Railways · Govt Exams — Your magical prep partner 🌿</p>
+    <div style="margin-bottom:18px">
+      <label class="form-label">Your Email Address</label>
+      <input class="form-input" type="email" id="login-email" placeholder="you@example.com" />
+    </div>
+    <button class="btn-primary" onclick="handleLogin()">Enter the Grove ✨</button>
+    <p class="error-tip" id="login-err">Please enter a valid email to continue 🌱</p>
+    <p style="margin-top:18px;font-size:.82rem;color:var(--text-light)">No password needed — just your email to begin! 🍃</p>
+  </div>
+</div>
+
+<!-- ══════════════ SUBJECTS ══════════════ -->
+<div id="page-subjects" class="page">
+  <div class="pad" style="max-width:1200px;margin:0 auto">
+    <div class="top-bar">
+      <span class="top-logo">📚 Study Grove</span>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <div class="lang-toggle">
+          <button class="lang-btn active" id="top-lang-en" onclick="setLang('en')">EN</button>
+          <button class="lang-btn"        id="top-lang-hi" onclick="setLang('hi')">हिं</button>
+        </div>
+        <span class="user-chip" id="user-chip">🍃 Guest</span>
+        <!-- admin-nav-btn hidden intentionally -->
+        <button class="logout-btn" id="logout-btn" onclick="goLogout()">Leave ↩</button>
+      </div>
+    </div>
+    <div class="welcome-block">
+      <h2 id="welcome-msg">Welcome! ✨</h2>
+      <p>Choose a subject or exam and begin your journey today 🌱</p>
+    </div>
+    <!-- Motivational Quote Banner -->
+    <div class="quote-banner" id="quote-banner">
+      <div class="quote-text" id="quote-text">Loading…</div>
+      <div class="quote-author" id="quote-author"></div>
+      <div class="quote-dots" id="quote-dots"></div>
+    </div>
+    <!-- Progress overview -->
+    <div class="progress-bar-wrap" id="overall-progress" style="display:none">
+      <h4>🌱 Your Progress</h4>
+      <div class="progress-subjects" id="progress-rows"></div>
+    </div>
+    <div class="subjects-grid" id="subjects-grid"></div>
+  </div>
+</div>
+
+<!-- ══════════════ TEACHERS ══════════════ -->
+<div id="page-teachers" class="page">
+  <div class="pad" style="max-width:1200px;margin:0 auto">
+    <div class="page-header">
+      <button class="back-btn" id="teachers-back-btn" onclick="goPage('subjects')">← Back</button>
+      <div style="flex:1">
+        <div class="page-title" id="teachers-title">Teachers</div>
+        <div class="page-sub" id="teachers-sub">Choose your guide for this journey 🌿</div>
+      </div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="t-lang-en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn"        id="t-lang-hi" onclick="setLang('hi')">हिं</button>
+      </div>
+    </div>
+    <div class="teachers-grid" id="teachers-grid"></div>
+  </div>
+</div>
+
+<!-- ══════════════ TOPICS ══════════════ -->
+<div id="page-topics" class="page">
+  <div class="topics-wrap pad">
+    <div class="page-header">
+      <button class="back-btn" id="topics-back-btn" onclick="goPage('teachers')">← Back</button>
+      <div style="flex:1">
+        <div class="page-title" id="topics-title">Topics</div>
+        <div class="page-sub" id="topics-sub">Explore and learn at your own pace ✨</div>
+      </div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="tp-lang-en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn"        id="tp-lang-hi" onclick="setLang('hi')">हिं</button>
+      </div>
+    </div>
+    <div id="teacher-hero"></div>
+    <div id="teacher-progress-bar" style="margin-bottom:16px"></div>
+    <div id="topics-list"></div>
+  </div>
+</div>
+
+<!-- ══════════════ ADMIN PAGE ══════════════ -->
+<div id="page-admin" class="page">
+  <div class="admin-wrap">
+    <div class="admin-hero">
+      <div class="admin-hero-icon">⚙️</div>
+      <div>
+        <h1>Admin Dashboard <span class="admin-badge">ADMIN</span></h1>
+        <p id="admin-welcome-msg">Welcome, Admin. Full content overview below.</p>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:10px;flex-wrap:wrap">
+        <div class="lang-toggle">
+          <button class="lang-btn active" id="adm-lang-en" onclick="setLang('en')">EN</button>
+          <button class="lang-btn"        id="adm-lang-hi" onclick="setLang('hi')">हिं</button>
+        </div>
+        <button class="back-btn" onclick="goPage('subjects')" style="margin:0">← Home</button>
+        <button class="logout-btn" onclick="goLogout()" style="margin:0;background:rgba(255,255,255,.2);color:#fff;border-radius:10px;padding:8px 14px">Leave ↩</button>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="admin-stats-grid" id="admin-stats"></div>
+
+    <!-- Subjects Tree -->
+    <div class="admin-section">
+      <h3>📚 All Subjects & Teachers</h3>
+      <div id="admin-subjects-tree"></div>
+    </div>
+
+    <!-- All YouTube Links -->
+    <div class="admin-section">
+      <h3>▶️ All YouTube Video Links</h3>
+      <div id="admin-yt-links"></div>
+    </div>
+
+    <!-- All Selection Adda Links -->
+    <div class="admin-section">
+      <h3>🏛️ All Selection Adda Mock Test Links</h3>
+      <div id="admin-sa-links"></div>
+    </div>
+
+    <!-- All Other Links -->
+    <div class="admin-section">
+      <h3>🔗 All Other Resource Links</h3>
+      <div id="admin-other-links"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ AI ASSISTANT ══════════════ -->
+<div class="ai-fab" onclick="toggleAI()" title="Ask Kodama!">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <!-- Body -->
+    <ellipse cx="50" cy="62" rx="27" ry="21" fill="#FFF8EC" stroke="#E8B86D" stroke-width="2.2"/>
+    <!-- Head -->
+    <circle cx="50" cy="36" r="22" fill="#FFF8EC" stroke="#E8B86D" stroke-width="2.2"/>
+    <!-- Eyes with blink -->
+    <g class="eye-l"><ellipse cx="42" cy="34" rx="4" ry="4" fill="#5C3D2E"/><circle cx="43.5" cy="32.5" r="1.4" fill="white"/></g>
+    <g class="eye-r"><ellipse cx="58" cy="34" rx="4" ry="4" fill="#5C3D2E"/><circle cx="59.5" cy="32.5" r="1.4" fill="white"/></g>
+    <!-- Rosy cheeks -->
+    <circle cx="35" cy="40" r="3.2" fill="#FFB0A0" opacity=".55"/>
+    <circle cx="65" cy="40" r="3.2" fill="#FFB0A0" opacity=".55"/>
+    <!-- Smile -->
+    <path d="M44 42 Q50 48 56 42" stroke="#5C3D2E" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <!-- Leaf crown -->
+    <ellipse cx="50" cy="14" rx="9" ry="4.5" fill="#7BAE7F" transform="rotate(-12 50 14)"/>
+    <ellipse cx="57" cy="11" rx="6" ry="3" fill="#4A7C59" transform="rotate(20 57 11)"/>
+    <ellipse cx="43" cy="12" rx="5.5" ry="2.8" fill="#7BAE7F" transform="rotate(-25 43 12)"/>
+    <!-- Arms -->
+    <ellipse cx="22" cy="59" rx="7.5" ry="4" fill="#FFF8EC" stroke="#E8B86D" stroke-width="1.5" transform="rotate(-30 22 59)"/>
+    <ellipse cx="78" cy="59" rx="7.5" ry="4" fill="#FFF8EC" stroke="#E8B86D" stroke-width="1.5" transform="rotate(30 78 59)"/>
+    <!-- Belly spots -->
+    <circle cx="45" cy="64" r="2.2" fill="#E8B86D" opacity=".42"/>
+    <circle cx="55" cy="64" r="2.2" fill="#E8B86D" opacity=".42"/>
+    <circle cx="50" cy="71" r="2.2" fill="#E8B86D" opacity=".42"/>
+  </svg>
+</div>
+
+<div class="ai-panel" id="ai-panel">
+  <div class="ai-header">
+    <span class="ai-header-avi">🌿</span>
+    <div class="ai-header-text">
+      <h3>Kodama · Study Spirit ✨</h3>
+      <p>Search teachers, topics & links — just ask!</p>
+    </div>
+    <button class="ai-close-btn" onclick="toggleAI()">✕</button>
+  </div>
+  <div class="ai-msgs" id="ai-msgs">
+    <div class="msg ai">
+      ✨ <strong>Hello, dear aspirant!</strong> I'm Kodama — I'll take you <strong>straight to the topic</strong> you need! 🌿<br><br>
+      Just ask me anything like:<br>
+      📐 <em>"Trigonometry"</em> → opens topic with all links<br>
+      🏛️ <em>"Rakesh Yadav percentage"</em> → opens that exact lesson<br>
+      🏦 <em>"Syllogism"</em> → jumps to Syllogism page<br>
+      🚂 <em>"Current Affairs Pratik Nayak"</em> → direct navigation<br>
+      🔤 <em>"Vocabulary"</em> → opens Vocabulary topic<br><br>
+      I'll <strong>open the page</strong> with all resources for you! 🌱
+    </div>
+  </div>
+  <div class="ai-input-row">
+    <input class="ai-input" id="ai-input" placeholder="Ask Kodama anything…" onkeydown="if(event.key==='Enter')sendAI()"/>
+    <button class="ai-send" onclick="sendAI()">🔍</button>
+  </div>
+</div>
+
+<!-- ══════════════ SCRIPT ══════════════ -->
+<script>
+// ─────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────
+const SUBJECTS = {
+  maths: {
+    name:"Mathematics", icon:"📐", color:"#E8916A",
+    desc:"Numbers, equations, geometry & beyond",
+    teachers:[
+      {
+        name:"Prof. Aryan Sharma", emoji:"👨‍🏫",
+        bio:"IIT alumni · 15 years experience",
+        topics:[
+          { name:"Algebra Fundamentals", icon:"➕", links:[
+            {t:"Linear Equations — Full Course",      u:"https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equation-intro",            p:"Khan Academy"},
+            {t:"Quadratic Equations Mastery",         u:"https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratic-functions-intro",         p:"Khan Academy"},
+            {t:"Polynomials Explained",               u:"https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:poly-intro",                        p:"Khan Academy"},
+          ]},
+          { name:"Trigonometry", icon:"📐", links:[
+            {t:"Introduction to Trigonometry",        u:"https://www.khanacademy.org/math/trigonometry",                                                  p:"Khan Academy"},
+            {t:"Sin, Cos, Tan — Complete Guide",      u:"https://www.mathsisfun.com/sine-cosine-tangent.html",                                            p:"Maths is Fun"},
+            {t:"Trigonometric Identities",            u:"https://www.khanacademy.org/math/trigonometry/trig-equations-and-identities",                    p:"Khan Academy"},
+          ]},
+          { name:"Coordinate Geometry", icon:"📊", links:[
+            {t:"Cartesian Plane & Plotting",          u:"https://www.khanacademy.org/math/basic-geo/basic-geo-coord-plane",                               p:"Khan Academy"},
+            {t:"Distance & Midpoint Formula",         u:"https://www.khanacademy.org/math/geometry/hs-geo-analytic-geometry",                             p:"Khan Academy"},
+            {t:"Straight Lines & Slopes",             u:"https://www.mathsisfun.com/gradient.html",                                                       p:"Maths is Fun"},
+          ]},
+          { name:"Statistics & Probability", icon:"📉", links:[
+            {t:"Mean, Median, Mode & Range",          u:"https://www.khanacademy.org/math/statistics-probability",                                         p:"Khan Academy"},
+            {t:"Probability Basics",                  u:"https://www.khanacademy.org/math/statistics-probability/probability-library",                    p:"Khan Academy"},
+            {t:"Data Interpretation Practice",        u:"https://www.indiabix.com/data-interpretation/questions-and-answers/",                            p:"IndiaBix"},
+          ]},
+        ]
+      },
+      {
+        name:"Ms. Priya Gupta", emoji:"👩‍🏫",
+        bio:"Specialist in competitive exam maths",
+        topics:[
+          { name:"Arithmetic & Number System", icon:"🔢", links:[
+            {t:"Number System — IBPS/SSC Level",      u:"https://www.indiabix.com/aptitude/numbers/",                                                     p:"IndiaBix"},
+            {t:"HCF & LCM Problems",                  u:"https://www.indiabix.com/aptitude/hcf-and-lcm/",                                                 p:"IndiaBix"},
+            {t:"Number Theory Fundamentals",          u:"https://www.khanacademy.org/math/pre-algebra/pre-algebra-factors-multiples",                     p:"Khan Academy"},
+          ]},
+          { name:"Percentages & Ratios", icon:"💯", links:[
+            {t:"Percentage Problems — Practice Set",  u:"https://www.indiabix.com/aptitude/percentage/",                                                   p:"IndiaBix"},
+            {t:"Ratio & Proportion",                  u:"https://www.indiabix.com/aptitude/ratio-and-proportion/",                                        p:"IndiaBix"},
+            {t:"Profit, Loss & Discount",             u:"https://www.indiabix.com/aptitude/profit-and-loss/",                                              p:"IndiaBix"},
+          ]},
+          { name:"Time, Speed & Distance", icon:"🚂", links:[
+            {t:"Speed Time Distance — Concepts",      u:"https://www.indiabix.com/aptitude/time-and-distance/",                                            p:"IndiaBix"},
+            {t:"Work & Time Problems",                u:"https://www.indiabix.com/aptitude/time-and-work/",                                                p:"IndiaBix"},
+            {t:"Boats, Trains & Pipes",               u:"https://www.indiabix.com/aptitude/pipes-and-cistern/",                                           p:"IndiaBix"},
+          ]},
+          { name:"Mensuration", icon:"📏", links:[
+            {t:"Area & Perimeter — All Shapes",       u:"https://www.khanacademy.org/math/basic-geo/basic-geo-area-perimeter",                            p:"Khan Academy"},
+            {t:"Volume & Surface Area",               u:"https://www.khanacademy.org/math/basic-geo/basic-geo-volume-sa",                                 p:"Khan Academy"},
+            {t:"Mensuration Practice — SSC Level",    u:"https://www.indiabix.com/aptitude/area/",                                                        p:"IndiaBix"},
+          ]},
+        ]
+      },
+      {
+        name:"Dr. Rahul Verma", emoji:"🧑‍💼",
+        bio:"PhD Mathematics · Research-based teaching",
+        topics:[
+          { name:"Sequences & Series", icon:"🔗", links:[
+            {t:"Arithmetic & Geometric Progressions", u:"https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:sequences",                           p:"Khan Academy"},
+            {t:"Series Summation Techniques",         u:"https://www.mathsisfun.com/algebra/sequences-series.html",                                       p:"Maths is Fun"},
+            {t:"Fibonacci & Special Sequences",       u:"https://www.mathsisfun.com/numbers/fibonacci-sequence.html",                                     p:"Maths is Fun"},
+          ]},
+          { name:"Matrices & Determinants", icon:"🟦", links:[
+            {t:"Matrix Introduction & Operations",    u:"https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices",                        p:"Khan Academy"},
+            {t:"Determinants Explained",              u:"https://www.mathsisfun.com/algebra/matrix-determinant.html",                                     p:"Maths is Fun"},
+            {t:"Matrix Practice Questions",           u:"https://www.indiabix.com/aptitude/problems-on-trains/",                                          p:"IndiaBix"},
+          ]},
+          { name:"Calculus Basics", icon:"📈", links:[
+            {t:"Limits — Introduction",               u:"https://www.khanacademy.org/math/calculus-1/cs1-limits-and-continuity",                          p:"Khan Academy"},
+            {t:"Differentiation — Full Course",       u:"https://www.khanacademy.org/math/calculus-1/cs1-derivatives-definition-and-basic-rules",         p:"Khan Academy"},
+            {t:"Integration Fundamentals",            u:"https://www.khanacademy.org/math/calculus-1/cs1-integrals",                                      p:"Khan Academy"},
+          ]},
+        ]
+      },
+    ]
+  },
+  english: {
+    name:"English", icon:"📝", color:"#7BAE7F",
+    desc:"Grammar, vocabulary & communication",
+    teachers:[
+      {
+        name:"Ms. Sarah Collins", emoji:"👩‍🎓",
+        bio:"Cambridge Certified · 12 years teaching",
+        topics:[
+          { name:"Grammar Fundamentals", icon:"📖", links:[
+            {t:"Parts of Speech — Complete Guide",    u:"https://www.khanacademy.org/humanities/grammar/parts-of-speech-the-basics",                      p:"Khan Academy"},
+            {t:"Nouns, Pronouns & Verbs",             u:"https://www.khanacademy.org/humanities/grammar/parts-of-speech-the-basics/nouns",                p:"Khan Academy"},
+            {t:"Articles — A, An, The",               u:"https://www.khanacademy.org/humanities/grammar/parts-of-speech-the-basics/grammar-articles/v/articles-a-an-and-the", p:"Khan Academy"},
+          ]},
+          { name:"Tenses & Verb Forms", icon:"⏱️", links:[
+            {t:"12 English Tenses Explained",         u:"https://www.khanacademy.org/humanities/grammar/verbs-and-tenses",                                 p:"Khan Academy"},
+            {t:"Tense Practice — Competitive Exams",  u:"https://www.indiabix.com/english/tenses/",                                                       p:"IndiaBix"},
+            {t:"Present, Past & Future — BBC",        u:"https://www.bbc.co.uk/learningenglish/english/course/lower-intermediate/unit-1/session-1",       p:"BBC Learning English"},
+          ]},
+          { name:"Reading Comprehension", icon:"👁️", links:[
+            {t:"RC Strategy & Techniques",            u:"https://www.indiabix.com/english/reading-comprehension/",                                        p:"IndiaBix"},
+            {t:"Reading Skills — BBC English",        u:"https://www.bbc.co.uk/learningenglish",                                                          p:"BBC Learning English"},
+            {t:"Comprehension Practice Sets",         u:"https://www.khanacademy.org/ela/cc-2nd-reading-informational",                                   p:"Khan Academy"},
+          ]},
+          { name:"Essay & Letter Writing", icon:"✍️", links:[
+            {t:"How to Write a Formal Letter",        u:"https://www.bbc.co.uk/bitesize/topics/zqrq7ty/articles/zmpp92p",                                 p:"BBC Bitesize"},
+            {t:"Essay Writing — Structure & Tips",    u:"https://www.khanacademy.org/humanities/grammar",                                                 p:"Khan Academy"},
+            {t:"Formal & Informal Writing",           u:"https://www.bbc.co.uk/learningenglish/english/course/lower-intermediate",                        p:"BBC Learning English"},
+          ]},
+        ]
+      },
+      {
+        name:"Mr. James Mitchell", emoji:"👨‍🎓",
+        bio:"Oxford English · Vocabulary expert",
+        topics:[
+          { name:"Vocabulary Building", icon:"🔤", links:[
+            {t:"Word Power — Daily Practice",         u:"https://www.vocabulary.com/",                                                                    p:"Vocabulary.com"},
+            {t:"English Vocabulary — BBC 6 Min",      u:"https://www.bbc.co.uk/learningenglish/english/features/6-minute-vocabulary",                     p:"BBC Learning English"},
+            {t:"Root Words & Word Formation",         u:"https://www.khanacademy.org/ela/cc-4th-reading-vocab",                                           p:"Khan Academy"},
+          ]},
+          { name:"Synonyms & Antonyms", icon:"🔁", links:[
+            {t:"Synonyms — Practice Questions",       u:"https://www.indiabix.com/english/synonyms/",                                                     p:"IndiaBix"},
+            {t:"Antonyms — Complete Set",             u:"https://www.indiabix.com/english/antonyms/",                                                     p:"IndiaBix"},
+            {t:"Word Pairs — BBC English",            u:"https://www.bbc.co.uk/learningenglish/english/features/6-minute-vocabulary",                     p:"BBC Learning English"},
+          ]},
+          { name:"Idioms & Phrases", icon:"💬", links:[
+            {t:"Common English Idioms — BBC",         u:"https://www.bbc.co.uk/learningenglish/english/features/the-english-we-speak",                    p:"BBC Learning English"},
+            {t:"Idioms Practice — Competitive",       u:"https://www.indiabix.com/english/idioms-and-phrases/",                                           p:"IndiaBix"},
+            {t:"100 Important Phrases & Meanings",    u:"https://www.khanacademy.org/humanities/grammar",                                                 p:"Khan Academy"},
+          ]},
+          { name:"Sentence Correction", icon:"✅", links:[
+            {t:"Spotting Errors — Practice",          u:"https://www.indiabix.com/english/spotting-errors/",                                              p:"IndiaBix"},
+            {t:"Sentence Improvement Questions",      u:"https://www.indiabix.com/english/sentence-improvement/",                                         p:"IndiaBix"},
+            {t:"Para Jumbles & Sequencing",           u:"https://www.indiabix.com/english/ordering-of-sentences/",                                        p:"IndiaBix"},
+          ]},
+        ]
+      },
+      {
+        name:"Prof. Anita Desai", emoji:"👩‍💼",
+        bio:"Literature specialist · Creative writing",
+        topics:[
+          { name:"One Word Substitution", icon:"🎯", links:[
+            {t:"One Word Substitution — Practice",    u:"https://www.indiabix.com/english/one-word-substitution/",                                        p:"IndiaBix"},
+            {t:"Important OWS — SSC/Bank Level",      u:"https://www.indiabix.com/english/one-word-substitution/",                                        p:"IndiaBix"},
+            {t:"Vocabulary in Context",               u:"https://www.khanacademy.org/ela/cc-4th-reading-vocab",                                           p:"Khan Academy"},
+          ]},
+          { name:"Fill in the Blanks", icon:"📝", links:[
+            {t:"Cloze Test Practice",                 u:"https://www.indiabix.com/english/cloze-test/",                                                   p:"IndiaBix"},
+            {t:"Fill in the Blanks — Grammar",        u:"https://www.indiabix.com/english/fill-in-the-blanks/",                                           p:"IndiaBix"},
+            {t:"Word Usage in Context — BBC",         u:"https://www.bbc.co.uk/learningenglish/english/features/6-minute-grammar",                        p:"BBC Learning English"},
+          ]},
+          { name:"Comprehension & Analysis", icon:"📚", links:[
+            {t:"Passage Analysis Techniques",         u:"https://www.indiabix.com/english/reading-comprehension/",                                        p:"IndiaBix"},
+            {t:"Inferential Questions — Practice",    u:"https://www.khanacademy.org/ela/cc-6th-reading-vocab",                                           p:"Khan Academy"},
+            {t:"Critical Reading Skills",             u:"https://www.bbc.co.uk/learningenglish",                                                          p:"BBC Learning English"},
+          ]},
+        ]
+      },
+    ]
+  },
+  reasoning: {
+    name:"Reasoning", icon:"🧩", color:"#9B89CC",
+    desc:"Logical thinking & problem solving",
+    teachers:[
+      {
+        name:"Mr. Vikram Nair", emoji:"🧑‍🏫",
+        bio:"CAT 99.8 percentile · Logic specialist",
+        topics:[
+          { name:"Coding & Decoding", icon:"🔐", links:[
+            {t:"Coding Decoding — Full Concept",      u:"https://www.indiabix.com/logical-reasoning/coding-decoding/",                                    p:"IndiaBix"},
+            {t:"Letter & Number Coding",              u:"https://www.indiabix.com/logical-reasoning/coding-decoding/",                                    p:"IndiaBix"},
+            {t:"Coding — Practice Questions",         u:"https://www.indiabix.com/logical-reasoning/coding-decoding/",                                    p:"IndiaBix"},
+          ]},
+          { name:"Blood Relations", icon:"👨‍👩‍👧", links:[
+            {t:"Blood Relations — Concept & Tricks",  u:"https://www.indiabix.com/logical-reasoning/blood-relations/",                                    p:"IndiaBix"},
+            {t:"Family Tree Problems",                u:"https://www.indiabix.com/logical-reasoning/blood-relations/",                                    p:"IndiaBix"},
+            {t:"Mixed Blood Relation Practice",       u:"https://www.indiabix.com/logical-reasoning/blood-relations/",                                    p:"IndiaBix"},
+          ]},
+          { name:"Direction Sense", icon:"🧭", links:[
+            {t:"Direction & Distance Problems",       u:"https://www.indiabix.com/logical-reasoning/direction-sense-test/",                               p:"IndiaBix"},
+            {t:"Compass Direction Practice",          u:"https://www.indiabix.com/logical-reasoning/direction-sense-test/",                               p:"IndiaBix"},
+            {t:"Shadow & Sunrise Direction",          u:"https://www.indiabix.com/logical-reasoning/direction-sense-test/",                               p:"IndiaBix"},
+          ]},
+          { name:"Logical Puzzles", icon:"🧠", links:[
+            {t:"Seating Arrangement Puzzles",         u:"https://www.indiabix.com/logical-reasoning/puzzle-test/",                                        p:"IndiaBix"},
+            {t:"Floor & Box-Based Puzzles",           u:"https://www.indiabix.com/logical-reasoning/puzzle-test/",                                        p:"IndiaBix"},
+            {t:"Complex Arrangement Problems",        u:"https://www.indiabix.com/logical-reasoning/puzzle-test/",                                        p:"IndiaBix"},
+          ]},
+        ]
+      },
+      {
+        name:"Ms. Kavya Reddy", emoji:"👩‍💻",
+        bio:"UPSC qualified · Verbal reasoning expert",
+        topics:[
+          { name:"Syllogisms", icon:"🔺", links:[
+            {t:"Syllogism — Venn Diagram Method",     u:"https://www.indiabix.com/logical-reasoning/syllogism/",                                          p:"IndiaBix"},
+            {t:"All / Some / No Statements",          u:"https://www.indiabix.com/logical-reasoning/syllogism/",                                          p:"IndiaBix"},
+            {t:"Syllogism Practice Questions",        u:"https://www.indiabix.com/logical-reasoning/syllogism/",                                          p:"IndiaBix"},
+          ]},
+          { name:"Number Series", icon:"🔢", links:[
+            {t:"Number Series — Pattern Finding",     u:"https://www.indiabix.com/non-verbal-reasoning/series/",                                          p:"IndiaBix"},
+            {t:"Missing Number Problems",             u:"https://www.indiabix.com/non-verbal-reasoning/series/",                                          p:"IndiaBix"},
+            {t:"Alpha-Numeric Series",                u:"https://www.indiabix.com/verbal-reasoning/series-completion/",                                   p:"IndiaBix"},
+          ]},
+          { name:"Analogy", icon:"⚖️", links:[
+            {t:"Word Analogy — Concept & Practice",   u:"https://www.indiabix.com/verbal-reasoning/analogy/",                                             p:"IndiaBix"},
+            {t:"Letter Analogy Problems",             u:"https://www.indiabix.com/verbal-reasoning/analogy/",                                             p:"IndiaBix"},
+            {t:"Number Analogy Practice",             u:"https://www.indiabix.com/verbal-reasoning/analogy/",                                             p:"IndiaBix"},
+          ]},
+          { name:"Classification & Odd One Out", icon:"🎯", links:[
+            {t:"Classification Problems",             u:"https://www.indiabix.com/verbal-reasoning/classification/",                                      p:"IndiaBix"},
+            {t:"Odd One Out — Practice",              u:"https://www.indiabix.com/verbal-reasoning/classification/",                                      p:"IndiaBix"},
+            {t:"Non-Verbal Classification",           u:"https://www.indiabix.com/non-verbal-reasoning/classification/",                                  p:"IndiaBix"},
+          ]},
+        ]
+      },
+      {
+        name:"Dr. Suresh Pillai", emoji:"👨‍🔬",
+        bio:"Critical thinking & decision analysis",
+        topics:[
+          { name:"Statement & Assumptions", icon:"💭", links:[
+            {t:"Statement Assumptions — Concepts",    u:"https://www.indiabix.com/logical-reasoning/statement-and-assumptions/",                          p:"IndiaBix"},
+            {t:"Implicit Assumptions Practice",       u:"https://www.indiabix.com/logical-reasoning/statement-and-assumptions/",                          p:"IndiaBix"},
+            {t:"Statement & Conclusions",             u:"https://www.indiabix.com/logical-reasoning/statement-and-conclusions/",                          p:"IndiaBix"},
+          ]},
+          { name:"Cause & Effect", icon:"⚡", links:[
+            {t:"Cause & Effect Questions",            u:"https://www.indiabix.com/logical-reasoning/cause-and-effect/",                                   p:"IndiaBix"},
+            {t:"Course of Action Practice",           u:"https://www.indiabix.com/logical-reasoning/course-of-action/",                                   p:"IndiaBix"},
+            {t:"Critical Reasoning Guide",            u:"https://www.khanacademy.org/reading-and-language-arts",                                          p:"Khan Academy"},
+          ]},
+          { name:"Data Sufficiency", icon:"📋", links:[
+            {t:"Data Sufficiency — GMAT Style",       u:"https://www.indiabix.com/logical-reasoning/data-sufficiency/",                                   p:"IndiaBix"},
+            {t:"Sufficiency Practice Sets",           u:"https://www.indiabix.com/logical-reasoning/data-sufficiency/",                                   p:"IndiaBix"},
+            {t:"Input Output Reasoning",              u:"https://www.indiabix.com/logical-reasoning/logical-games/",                                      p:"IndiaBix"},
+          ]},
+        ]
+      },
+    ]
+  },
+  ssc: {
+    name:"SSC Exams", icon:"🏛️", color:"#E05A5A",
+    desc:"CGL · CHSL · CPO · MTS — India's top govt jobs",
+    teachers:[
+      {
+        name:"Rakesh Yadav Sir", emoji:"👨‍🏫",
+        bio:"SSC Maths Legend · 20+ yrs · 7300+ Questions Book",
+        topics:[
+          { name:"Number System & HCF/LCM", icon:"🔢", links:[
+            {t:"SSC 2025 Maths Introduction — Full Course",       u:"https://www.youtube.com/watch?v=jx4RfPmrzVg",                                              p:"Rakesh Yadav YouTube"},
+            {t:"Number System — SSC 2025 Batch",                 u:"https://www.youtube.com/watch?v=sUNQOoirL7Q",                                              p:"Rakesh Yadav YouTube"},
+            {t:"SSC 2025 Full Maths Playlist",                   u:"https://www.youtube.com/playlist?list=PLoMiZRRlvbSuTLUDP-4qLk-49iTMQQf-i",              p:"Rakesh Yadav YouTube"},
+          ]},
+          { name:"Percentage & Profit/Loss", icon:"💯", links:[
+            {t:"Complete Percentage in ONE SHOT — All Exams",    u:"https://www.youtube.com/watch?v=Z5w1GL19-78",                                              p:"Rakesh Yadav YouTube"},
+            {t:"Percentage — Pratham Batch 2025",                u:"https://www.youtube.com/watch?v=VmPtUvD0ypI",                                              p:"Rakesh Yadav YouTube"},
+            {t:"Percentage Practice — SSC Level",                u:"https://www.indiabix.com/aptitude/percentage/",                                             p:"IndiaBix"},
+          ]},
+          { name:"Algebra & Trigonometry", icon:"📐", links:[
+            {t:"SSC CGL Mains 2024 — Algebra Class",             u:"https://www.youtube.com/watch?v=oryY59czbfI",                                              p:"Rakesh Yadav YouTube"},
+            {t:"Trigonometry — Khan Academy",                    u:"https://www.khanacademy.org/math/trigonometry",                                             p:"Khan Academy"},
+            {t:"Algebra Fundamentals — Khan Academy",            u:"https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equation-intro",         p:"Khan Academy"},
+          ]},
+          { name:"SSC CGL Mock Tests", icon:"📝", links:[
+            {t:"SSC CGL Free Mock Test — Selection Adda",        u:"https://www.selectionadda.in/ssc-cgl-online-test-series",                                  p:"Selection Adda"},
+            {t:"SSC CHSL Mock Test Series",                      u:"https://www.selectionadda.in/ssc-chsl-online-test-series",                                 p:"Selection Adda"},
+            {t:"SSC CPO Mock Test Series",                       u:"https://www.selectionadda.in/ssc-cpo-online-test-series",                                  p:"Selection Adda"},
+          ]},
+        ]
+      },
+      {
+        name:"Neetu Singh Mam", emoji:"👩‍🏫",
+        bio:"English Expert · SSC/Banking · Grammar Queen",
+        topics:[
+          { name:"English Grammar — SSC", icon:"📖", links:[
+            {t:"Strategy for English Grammar — SSC CGL 2024",   u:"https://www.youtube.com/watch?v=OWR9UdpD-aY",                                              p:"Neetu Singh Mam YouTube"},
+            {t:"Parts of Speech — Complete Guide",               u:"https://www.khanacademy.org/humanities/grammar/parts-of-speech-the-basics",                p:"Khan Academy"},
+            {t:"Spotting Errors — SSC Practice",                 u:"https://www.indiabix.com/english/spotting-errors/",                                        p:"IndiaBix"},
+          ]},
+          { name:"Vocabulary & Synonyms", icon:"🔤", links:[
+            {t:"SSC CGL Vocabulary — 2010–2023 Asked Words",     u:"https://www.youtube.com/watch?v=QWVdsmwhklM",                                              p:"YouTube"},
+            {t:"Synonyms Practice — SSC Level",                  u:"https://www.indiabix.com/english/synonyms/",                                               p:"IndiaBix"},
+            {t:"One Word Substitution — SSC/Bank Level",         u:"https://www.indiabix.com/english/one-word-substitution/",                                  p:"IndiaBix"},
+          ]},
+          { name:"Cloze Test & Reading", icon:"👁️", links:[
+            {t:"Cloze Test Practice",                            u:"https://www.indiabix.com/english/cloze-test/",                                              p:"IndiaBix"},
+            {t:"RC Techniques — SSC Level",                      u:"https://www.indiabix.com/english/reading-comprehension/",                                  p:"IndiaBix"},
+            {t:"Para Jumbles Practice",                          u:"https://www.indiabix.com/english/ordering-of-sentences/",                                   p:"IndiaBix"},
+          ]},
+        ]
+      },
+      {
+        name:"Nitin Sir", emoji:"🧑‍🏫",
+        bio:"Reasoning Expert · SSC/MTS/CGL Specialist",
+        topics:[
+          { name:"Syllogism", icon:"🔺", links:[
+            {t:"Syllogism Mock — SSC MTS/CGL 2024 by Nitin Sir", u:"https://www.youtube.com/watch?v=WJOoo0ZmXDA",                                              p:"Nitin Sir YouTube"},
+            {t:"Syllogism by 100/50 Method — SSC 2024",          u:"https://www.youtube.com/watch?v=zEul75Iriew",                                              p:"YouTube"},
+            {t:"Syllogism Practice Questions",                   u:"https://www.indiabix.com/logical-reasoning/syllogism/",                                    p:"IndiaBix"},
+          ]},
+          { name:"Blood Relations & Direction", icon:"👨‍👩‍👧", links:[
+            {t:"Blood Relation — SSC CGL & MTS 2024",            u:"https://www.youtube.com/watch?v=UMhJvtQ0J-s",                                              p:"YouTube"},
+            {t:"Complete Blood Relation — Quick Revision",       u:"https://www.youtube.com/watch?v=rknj5SOvTGU",                                              p:"YouTube"},
+            {t:"Direction Sense Problems",                       u:"https://www.indiabix.com/logical-reasoning/direction-sense-test/",                          p:"IndiaBix"},
+          ]},
+          { name:"SSC GD / MTS Practice", icon:"📋", links:[
+            {t:"SSC GD Constable Mock Test",                     u:"https://www.selectionadda.in/ssc-gd-constable-online-test-series",                         p:"Selection Adda"},
+            {t:"SSC MTS Mock Test Series",                       u:"https://www.selectionadda.in/ssc-mts-online-test-series",                                  p:"Selection Adda"},
+            {t:"Puzzle & Seating Arrangement",                   u:"https://www.indiabix.com/logical-reasoning/puzzle-test/",                                  p:"IndiaBix"},
+          ]},
+        ]
+      },
+    ]
+  },
+  banking: {
+    name:"Banking Exams", icon:"🏦", color:"#3B82C4",
+    desc:"SBI · IBPS · RBI — Crack the banking sector",
+    teachers:[
+      {
+        name:"Abhinay Sharma Sir", emoji:"👨‍💼",
+        bio:"Abhinay Maths · SSC & Banking Quant King",
+        topics:[
+          { name:"Simplification & Approximation", icon:"🔢", links:[
+            {t:"SSC CGL Speed & Selection — Abhinay Sir",        u:"https://www.youtube.com/watch?v=G7tpM5m860I",                                              p:"Abhinay Maths YouTube"},
+            {t:"Abhinay Maths — Full Channel",                   u:"https://www.youtube.com/channel/UCdVmeIX3xVnQcTa5OMRz-hw",                                p:"Abhinay Maths YouTube"},
+            {t:"Simplification Practice — Banking Level",        u:"https://www.indiabix.com/aptitude/simplification/",                                        p:"IndiaBix"},
+          ]},
+          { name:"Profit, Loss & Data Interpretation", icon:"📊", links:[
+            {t:"Complete Profit & Loss — SSC CGL 2024",          u:"https://www.youtube.com/watch?v=AJ5DdTPbCOs",                                              p:"Abhinay Maths YouTube"},
+            {t:"Complete Algebra Marathon — SSC CGL 2024",       u:"https://www.youtube.com/watch?v=GjppUc4H18E",                                              p:"Abhinay Maths YouTube"},
+            {t:"Data Interpretation Practice",                   u:"https://www.indiabix.com/data-interpretation/questions-and-answers/",                      p:"IndiaBix"},
+          ]},
+          { name:"Speed, Distance & Time", icon:"🚂", links:[
+            {t:"Speed & Distance Hacks — Abhinay Sir",           u:"https://www.youtube.com/watch?v=M0J7RQAGpzU",                                              p:"Abhinay Maths YouTube"},
+            {t:"Time & Work Problems",                           u:"https://www.indiabix.com/aptitude/time-and-work/",                                         p:"IndiaBix"},
+            {t:"Pipes, Boats & Trains",                          u:"https://www.indiabix.com/aptitude/pipes-and-cistern/",                                     p:"IndiaBix"},
+          ]},
+          { name:"SBI & IBPS Mock Tests", icon:"📝", links:[
+            {t:"SBI Clerk Mock Test — Selection Adda",           u:"https://www.selectionadda.in/sbi-clerk-online-test-series",                                p:"Selection Adda"},
+            {t:"IBPS PO Mock Test Series",                       u:"https://www.selectionadda.in/ibps-po-online-test-series",                                  p:"Selection Adda"},
+            {t:"SBI PO Mock Test Series",                        u:"https://www.selectionadda.in/sbi-po-online-test-series",                                   p:"Selection Adda"},
+          ]},
+        ]
+      },
+      {
+        name:"Sachin Sir (Reasoning Raftaar)", emoji:"🧑‍💻",
+        bio:"Banking Reasoning Expert · Puzzle & DI Specialist",
+        topics:[
+          { name:"Puzzles & Seating Arrangement", icon:"🧩", links:[
+            {t:"Bank Exams 2024 — Syllogism, Puzzle, Blood Relation", u:"https://www.youtube.com/watch?v=LV71MR6F6zQ",                                         p:"Reasoning Raftaar YouTube"},
+            {t:"Seating Arrangement Practice",                   u:"https://www.indiabix.com/logical-reasoning/puzzle-test/",                                  p:"IndiaBix"},
+            {t:"Floor & Box Puzzles",                            u:"https://www.indiabix.com/logical-reasoning/puzzle-test/",                                  p:"IndiaBix"},
+          ]},
+          { name:"Inequalities & Coding", icon:"⚖️", links:[
+            {t:"Coding Decoding — Full Concept",                 u:"https://www.indiabix.com/logical-reasoning/coding-decoding/",                               p:"IndiaBix"},
+            {t:"Number & Letter Series",                         u:"https://www.indiabix.com/non-verbal-reasoning/series/",                                    p:"IndiaBix"},
+            {t:"Statement & Assumptions",                        u:"https://www.indiabix.com/logical-reasoning/statement-and-assumptions/",                    p:"IndiaBix"},
+          ]},
+          { name:"IBPS & RBI Mocks", icon:"🏅", links:[
+            {t:"IBPS Clerk Mock Test Series",                    u:"https://www.selectionadda.in/ibps-clerk-online-test-series",                               p:"Selection Adda"},
+            {t:"RBI Assistant Mock Test Series",                 u:"https://www.selectionadda.in/rbi-assistant-online-test-series",                            p:"Selection Adda"},
+            {t:"IBPS RRB PO Mock Test",                          u:"https://www.selectionadda.in/rrb-po-online-test-series",                                   p:"Selection Adda"},
+          ]},
+        ]
+      },
+      {
+        name:"Kiran Mam (English)", emoji:"👩‍🎓",
+        bio:"SSC & Banking English · Vocabulary & Grammar Specialist",
+        topics:[
+          { name:"Banking English Grammar", icon:"📗", links:[
+            {t:"CHSL & CGL English Vocabulary — Kiran Mam Playlist", u:"https://www.youtube.com/playlist?list=PLw2ZiQ6OwlOXC19Y3QXFjwBjcpYutPvVQ",           p:"YouTube"},
+            {t:"Fill in the Blanks — Bank Level",                u:"https://www.indiabix.com/english/fill-in-the-blanks/",                                     p:"IndiaBix"},
+            {t:"Sentence Improvement Questions",                 u:"https://www.indiabix.com/english/sentence-improvement/",                                   p:"IndiaBix"},
+          ]},
+          { name:"Synonyms, Antonyms & Idioms", icon:"🔁", links:[
+            {t:"SSC CGL Pre — All Synonyms Asked 2010–2023",     u:"https://www.youtube.com/watch?v=RrA0cMqgJ90",                                              p:"YouTube"},
+            {t:"Antonyms Practice",                              u:"https://www.indiabix.com/english/antonyms/",                                               p:"IndiaBix"},
+            {t:"Idioms & Phrases — SSC/Bank",                    u:"https://www.indiabix.com/english/idioms-and-phrases/",                                     p:"IndiaBix"},
+          ]},
+        ]
+      },
+    ]
+  },
+  railways: {
+    name:"Railways Exams", icon:"🚂", color:"#2E7D32",
+    desc:"RRB NTPC · Group D · ALP — Rail India careers",
+    teachers:[
+      {
+        name:"Abhinay Sharma Sir", emoji:"👨‍💼",
+        bio:"Abhinay Maths · Railways Maths & Aptitude",
+        topics:[
+          { name:"Maths for RRB NTPC", icon:"📐", links:[
+            {t:"Complete Algebra for Railways — Abhinay Sir",    u:"https://www.youtube.com/watch?v=GjppUc4H18E",                                              p:"Abhinay Maths YouTube"},
+            {t:"Percentage & Ratio for Railways",                u:"https://www.indiabix.com/aptitude/percentage/",                                             p:"IndiaBix"},
+            {t:"RRB NTPC Mock Test Series",                      u:"https://www.selectionadda.in/rrb-ntpc-online-test-series",                                 p:"Selection Adda"},
+          ]},
+          { name:"Railways Group D Maths", icon:"🔧", links:[
+            {t:"Number System — Rakesh Yadav Sir",               u:"https://www.youtube.com/watch?v=sUNQOoirL7Q",                                              p:"Rakesh Yadav YouTube"},
+            {t:"Time, Work & Pipes",                             u:"https://www.indiabix.com/aptitude/time-and-work/",                                         p:"IndiaBix"},
+            {t:"Railways Group D Mock Test",                     u:"https://www.selectionadda.in/rrb-group-d-online-test-series",                              p:"Selection Adda"},
+          ]},
+        ]
+      },
+      {
+        name:"Pratik Nayak Sir", emoji:"🧑‍🏫",
+        bio:"GK & Current Affairs · UPSC & Railways Specialist",
+        topics:[
+          { name:"History & Culture — Railways GK", icon:"🏺", links:[
+            {t:"1.5 Years Current Affairs — History & Art Part 1", u:"https://www.youtube.com/watch?v=r2dHM5CGT_8",                                            p:"Pratik Nayak YouTube"},
+            {t:"1.5 Years Current Affairs — History Part 2",     u:"https://www.youtube.com/watch?v=AW8PlpsqF-4",                                              p:"Pratik Nayak YouTube"},
+            {t:"Indian History — GKToday Notes",                 u:"https://www.gktoday.in/topic/ancient-history/",                                            p:"GKToday"},
+          ]},
+          { name:"Current Affairs & Science", icon:"📰", links:[
+            {t:"Current Affairs Part 5 — 2024",                  u:"https://www.youtube.com/watch?v=O1bP7JCbujQ",                                              p:"Pratik Nayak YouTube"},
+            {t:"Current Affairs Part 6 — 2024",                  u:"https://www.youtube.com/watch?v=lQ_uFxRrsFI",                                              p:"Pratik Nayak YouTube"},
+            {t:"GK Today Current Affairs",                       u:"https://www.gktoday.in/current-affairs/",                                                  p:"GKToday"},
+          ]},
+          { name:"RRB ALP & Technician Mocks", icon:"⚡", links:[
+            {t:"RRB ALP Mock Test Series",                       u:"https://www.selectionadda.in/rrb-alp-online-test-series",                                  p:"Selection Adda"},
+            {t:"RRB JE Mock Test Series",                        u:"https://www.selectionadda.in/rrb-je-online-test-series",                                   p:"Selection Adda"},
+            {t:"RRB Technician Grade 3 Mock Test",               u:"https://www.selectionadda.in/rrb-technician-online-test-series",                          p:"Selection Adda"},
+          ]},
+        ]
+      },
+      {
+        name:"Nitin Sir (Reasoning)", emoji:"🧑‍🏫",
+        bio:"Reasoning for Railways · Series, Analogy & Puzzles",
+        topics:[
+          { name:"Series & Analogy", icon:"🔗", links:[
+            {t:"Number Series — Pattern Finding",                u:"https://www.indiabix.com/non-verbal-reasoning/series/",                                    p:"IndiaBix"},
+            {t:"Alpha-Numeric Series Practice",                  u:"https://www.indiabix.com/verbal-reasoning/series-completion/",                             p:"IndiaBix"},
+            {t:"Word Analogy Practice",                          u:"https://www.indiabix.com/verbal-reasoning/analogy/",                                       p:"IndiaBix"},
+          ]},
+          { name:"Coding, Directions & Blood Relation", icon:"🧭", links:[
+            {t:"Coding Decoding — Full Concept",                 u:"https://www.indiabix.com/logical-reasoning/coding-decoding/",                               p:"IndiaBix"},
+            {t:"Blood Relation — Quick Revision Batch",          u:"https://www.youtube.com/watch?v=rknj5SOvTGU",                                              p:"YouTube"},
+            {t:"Direction Sense Problems",                       u:"https://www.indiabix.com/logical-reasoning/direction-sense-test/",                          p:"IndiaBix"},
+          ]},
+          { name:"RPF Constable & SI Mocks", icon:"🛡️", links:[
+            {t:"RPF Constable Mock Test",                        u:"https://www.selectionadda.in/rpf-constable-online-test-series",                            p:"Selection Adda"},
+            {t:"RPF SI Mock Test Series",                        u:"https://www.selectionadda.in/rpf-si-online-test-series",                                   p:"Selection Adda"},
+            {t:"Puzzle Test Practice",                           u:"https://www.indiabix.com/logical-reasoning/puzzle-test/",                                  p:"IndiaBix"},
+          ]},
+        ]
+      },
+    ]
+  },
+  gk: {
+    name:"General Awareness", icon:"🌍", color:"#5EA8C0",
+    desc:"Current affairs, history & world knowledge",
+    teachers:[
+      {
+        name:"Ms. Ritu Singh", emoji:"👩‍🏛️",
+        bio:"UPSC Civil Services · GK specialist",
+        topics:[
+          { name:"Current Affairs", icon:"📰", links:[
+            {t:"Daily Current Affairs — GKToday",     u:"https://www.gktoday.in/current-affairs/",                                                        p:"GKToday"},
+            {t:"Monthly Current Affairs PDF",         u:"https://www.gktoday.in/current-affairs/monthly-current-affairs/",                               p:"GKToday"},
+            {t:"Current Affairs Quiz — Practice",     u:"https://www.indiabix.com/current-affairs/questions-and-answers/",                               p:"IndiaBix"},
+          ]},
+          { name:"Indian Polity", icon:"🏛️", links:[
+            {t:"Indian Constitution — Complete",      u:"https://www.gktoday.in/topic/indian-polity/",                                                    p:"GKToday"},
+            {t:"Parliament & Fundamental Rights",     u:"https://www.gktoday.in/topic/indian-polity/parliament/",                                        p:"GKToday"},
+            {t:"Polity Practice Questions",           u:"https://www.indiabix.com/general-knowledge/indian-politics/",                                   p:"IndiaBix"},
+          ]},
+          { name:"Geography", icon:"🗺️", links:[
+            {t:"Indian Geography — Complete",         u:"https://www.gktoday.in/topic/indian-geography/",                                                 p:"GKToday"},
+            {t:"World Geography Basics",              u:"https://www.gktoday.in/topic/world-geography/",                                                  p:"GKToday"},
+            {t:"Geography Practice — SSC Level",      u:"https://www.indiabix.com/general-knowledge/geography/",                                         p:"IndiaBix"},
+          ]},
+          { name:"Science & Technology", icon:"🔬", links:[
+            {t:"Science GK — Important Topics",       u:"https://www.gktoday.in/topic/science-and-technology/",                                           p:"GKToday"},
+            {t:"Science Practice Questions",          u:"https://www.indiabix.com/general-knowledge/basic-general-knowledge/",                           p:"IndiaBix"},
+            {t:"Technology Current Affairs",          u:"https://www.gktoday.in/current-affairs/science-technology/",                                    p:"GKToday"},
+          ]},
+        ]
+      },
+      {
+        name:"Mr. Anil Kumar", emoji:"👨‍🏛️",
+        bio:"History & Culture · 18 years experience",
+        topics:[
+          { name:"Indian History", icon:"🏺", links:[
+            {t:"Ancient India — Complete Notes",      u:"https://www.gktoday.in/topic/ancient-history/",                                                  p:"GKToday"},
+            {t:"Medieval & Modern India",             u:"https://www.gktoday.in/topic/medieval-history/",                                                 p:"GKToday"},
+            {t:"History Practice Questions",          u:"https://www.indiabix.com/general-knowledge/history/",                                           p:"IndiaBix"},
+          ]},
+          { name:"Indian Culture & Art", icon:"🎨", links:[
+            {t:"Indian Culture — Art & Architecture", u:"https://www.gktoday.in/topic/art-culture/",                                                      p:"GKToday"},
+            {t:"Classical Dances, Music & Festivals", u:"https://www.gktoday.in/topic/art-culture/classical-dances/",                                    p:"GKToday"},
+            {t:"Culture GK Practice",                 u:"https://www.indiabix.com/general-knowledge/indian-culture/",                                    p:"IndiaBix"},
+          ]},
+          { name:"Sports & Awards", icon:"🏆", links:[
+            {t:"Sports GK — Current & Historical",    u:"https://www.gktoday.in/topic/sports/",                                                           p:"GKToday"},
+            {t:"Awards & Honours — India & World",    u:"https://www.gktoday.in/topic/awards-and-honours/",                                              p:"GKToday"},
+            {t:"Sports Practice Questions",           u:"https://www.indiabix.com/general-knowledge/sports/",                                            p:"IndiaBix"},
+          ]},
+        ]
+      },
+      {
+        name:"Prof. Meera Joshi", emoji:"👩‍🏫",
+        bio:"Economics & International affairs expert",
+        topics:[
+          { name:"Indian Economy & Banking", icon:"🏦", links:[
+            {t:"Indian Economy — Key Concepts",       u:"https://www.gktoday.in/topic/indian-economy/",                                                   p:"GKToday"},
+            {t:"Banking & Finance Basics",            u:"https://www.gktoday.in/topic/banking-awareness/",                                               p:"GKToday"},
+            {t:"Economy Practice — IBPS Level",       u:"https://www.indiabix.com/general-knowledge/banking/",                                           p:"IndiaBix"},
+          ]},
+          { name:"International Organizations", icon:"🌐", links:[
+            {t:"UN, WHO, WTO & Others",               u:"https://www.gktoday.in/topic/international-organisations/",                                     p:"GKToday"},
+            {t:"International Relations GK",          u:"https://www.gktoday.in/current-affairs/international/",                                         p:"GKToday"},
+            {t:"World Organizations Quiz",            u:"https://www.indiabix.com/general-knowledge/world-organisations/",                               p:"IndiaBix"},
+          ]},
+          { name:"Environment & Ecology", icon:"🌿", links:[
+            {t:"Environment — Key Facts",             u:"https://www.gktoday.in/topic/environment-ecology/",                                              p:"GKToday"},
+            {t:"Climate Change & Conventions",        u:"https://www.gktoday.in/topic/environment-ecology/climate-change/",                              p:"GKToday"},
+            {t:"Environment Practice Questions",      u:"https://www.indiabix.com/general-knowledge/general-science/",                                   p:"IndiaBix"},
+          ]},
+        ]
+      },
+    ]
+  }
+};
+
+// ─────────────────────────────────────────
+// LANGUAGE SYSTEM
+// ─────────────────────────────────────────
+let LANG = 'en';
+const ADMIN_EMAIL = 'pratapsinghshivendra21@gmail.com';
+let isAdmin = false;
+
+const UI = {
+  en: {
+    loginSub:      'SSC · Banking · Railways · Govt Exams — Your magical prep partner 🌿',
+    emailLabel:    'Your Email Address',
+    emailPh:       'you@example.com',
+    enterBtn:      'Enter the Grove ✨',
+    emailErr:      'Please enter a valid email to continue 🌱',
+    noPassword:    'No password needed — just your email to begin! 🍃',
+    chooseSubject: 'Choose a subject or exam and begin your journey today 🌱',
+    teachersSub:   'Choose your guide for this journey 🌿',
+    topicsSub:     'Explore and learn at your own pace ✨',
+    backBtn:       '← Back',
+    leaveBtn:      'Leave ↩',
+    progressTitle: '🌱 Your Progress',
+    markDone:      '○ Mark Done',
+    doneTxt:       '✅ Done!',
+    topicsComp:    '📖 Topics completed:',
+    aiGreet:       '✨ <strong>Hello, dear aspirant!</strong> I\'m Kodama, your magical study companion!<br><br>You can ask me things like:<br>🏛️ <em>"SSC Maths by Rakesh Yadav"</em><br>🏦 <em>"Banking Reasoning Sachin Sir"</em><br>🚂 <em>"Railways GK topics"</em><br>📚 <em>"English grammar topics"</em><br>🍃 <em>"Show me Syllogism videos"</em><br><br>You\'re going to <strong>crack it</strong> today! 🌱 What shall we explore?',
+    aiPh:          'Ask Kodama anything…',
+    aiHeader:      'Kodama · Study Spirit ✨',
+    aiSub:         'Search teachers, topics & links — just ask!',
+    adminWelcome:  'Welcome, Admin. Full content overview below.',
+    teachersLabel: 'Teachers',
+    topicsLabel:   'Topics',
+    teacherPill:   'Topics ✨',
+  },
+  hi: {
+    loginSub:      'SSC · Banking · Railway · सरकारी नौकरी — आपका जादुई तैयारी साथी 🌿',
+    emailLabel:    'आपका ईमेल पता',
+    emailPh:       'aapka@email.com',
+    enterBtn:      'ग्रोव में प्रवेश करें ✨',
+    emailErr:      'कृपया एक वैध ईमेल दर्ज करें 🌱',
+    noPassword:    'पासवर्ड की जरूरत नहीं — बस ईमेल डालें! 🍃',
+    chooseSubject: 'आज अपना विषय या परीक्षा चुनें और यात्रा शुरू करें 🌱',
+    teachersSub:   'अपना मार्गदर्शक चुनें 🌿',
+    topicsSub:     'अपनी गति से सीखें और आगे बढ़ें ✨',
+    backBtn:       '← वापस',
+    leaveBtn:      'बाहर जाएँ ↩',
+    progressTitle: '🌱 आपकी प्रगति',
+    markDone:      '○ पूरा किया',
+    doneTxt:       '✅ हो गया!',
+    topicsComp:    '📖 पूर्ण विषय:',
+    aiGreet:       '✨ <strong>नमस्ते, प्रिय अभ्यर्थी!</strong> मैं कोडामा हूँ, आपका जादुई अध्ययन साथी!<br><br>आप मुझसे ऐसे पूछ सकते हैं:<br>🏛️ <em>"राकेश यादव का SSC गणित"</em><br>🏦 <em>"बैंकिंग तर्कशक्ति सचिन सर"</em><br>🚂 <em>"रेलवे GK विषय"</em><br>📚 <em>"अंग्रेज़ी व्याकरण विषय"</em><br>🍃 <em>"Syllogism वीडियो दिखाओ"</em><br><br>आप आज <strong>सफल होंगे!</strong> 🌱 क्या खोजना है?',
+    aiPh:          'कोडामा से कुछ भी पूछें…',
+    aiHeader:      'कोडामा · अध्ययन आत्मा ✨',
+    aiSub:         'शिक्षक, विषय और लिंक खोजें — बस पूछें!',
+    adminWelcome:  'स्वागत है, Admin। नीचे पूरा कंटेंट अवलोकन देखें।',
+    teachersLabel: 'शिक्षक',
+    topicsLabel:   'विषय',
+    teacherPill:   'विषय ✨',
+  }
+};
+
+// Hindi data for subjects (only translatable strings — icons/urls unchanged)
+
+const SUBJECTS_HI = {
+  maths:{name:"गणित",desc:"संख्याएँ, समीकरण, ज्यामिति और भी बहुत कुछ",teachers:[
+    {bio:"IIT पूर्व छात्र · 15 वर्ष का अनुभव",topics:[
+      {name:"बीजगणित की मूल बातें",links:[{t:"रैखिक समीकरण — पूर्ण कोर्स"},{t:"द्विघात समीकरण"},{t:"बहुपद की व्याख्या"}]},
+      {name:"त्रिकोणमिति",links:[{t:"त्रिकोणमिति का परिचय"},{t:"Sin Cos Tan — पूरी गाइड"},{t:"त्रिकोणमितीय पहचान"}]},
+      {name:"निर्देशांक ज्यामिति",links:[{t:"कार्तीय तल और आलेखन"},{t:"दूरी और मध्यबिंदु सूत्र"},{t:"सरल रेखा और ढाल"}]},
+      {name:"सांख्यिकी और प्रायिकता",links:[{t:"माध्य माध्यिका बहुलक"},{t:"प्रायिकता की मूल बातें"},{t:"डेटा विश्लेषण अभ्यास"}]},
+    ]},
+    {bio:"प्रतियोगी परीक्षा गणित विशेषज्ञ",topics:[
+      {name:"अंकगणित और संख्या पद्धति",links:[{t:"संख्या पद्धति — IBPS/SSC स्तर"},{t:"HCF और LCM समस्याएँ"},{t:"संख्या सिद्धांत"}]},
+      {name:"प्रतिशत और अनुपात",links:[{t:"प्रतिशत अभ्यास"},{t:"अनुपात और समानुपात"},{t:"लाभ हानि और छूट"}]},
+      {name:"समय चाल और दूरी",links:[{t:"चाल समय दूरी — अवधारणाएँ"},{t:"कार्य और समय"},{t:"नाव ट्रेन और पाइप"}]},
+      {name:"क्षेत्रमिति",links:[{t:"क्षेत्रफल और परिमाप"},{t:"आयतन और पृष्ठ क्षेत्र"},{t:"क्षेत्रमिति अभ्यास"}]},
+    ]},
+    {bio:"PhD गणित · शोध आधारित शिक्षण",topics:[
+      {name:"अनुक्रम और श्रेणी",links:[{t:"समांतर और गुणोत्तर श्रेणी"},{t:"श्रेणी योग तकनीक"},{t:"फिबोनाची और विशेष अनुक्रम"}]},
+      {name:"आव्यूह और सारणिक",links:[{t:"आव्यूह परिचय और संक्रियाएँ"},{t:"सारणिक की व्याख्या"},{t:"आव्यूह अभ्यास"}]},
+      {name:"कलन की मूल बातें",links:[{t:"सीमाएँ — परिचय"},{t:"अवकलन — पूर्ण कोर्स"},{t:"समाकलन की मूल बातें"}]},
+    ]},
+  ]},
+  english:{name:"अंग्रेज़ी",desc:"व्याकरण, शब्द भंडार और संवाद कौशल",teachers:[
+    {bio:"Cambridge प्रमाणित · 12 वर्ष का अनुभव",topics:[
+      {name:"व्याकरण की मूल बातें",links:[{t:"भाषण के भाग — पूरी गाइड"},{t:"संज्ञा सर्वनाम और क्रिया"},{t:"Articles — A An The"}]},
+      {name:"काल और क्रिया रूप",links:[{t:"12 अंग्रेज़ी काल — व्याख्या"},{t:"काल अभ्यास"},{t:"Present Past Future — BBC"}]},
+      {name:"पठन बोध",links:[{t:"RC रणनीति और तकनीक"},{t:"पठन कौशल — BBC"},{t:"बोध अभ्यास सेट"}]},
+      {name:"निबंध और पत्र लेखन",links:[{t:"औपचारिक पत्र कैसे लिखें"},{t:"निबंध लेखन — संरचना"},{t:"औपचारिक और अनौपचारिक लेखन"}]},
+    ]},
+    {bio:"Oxford English · शब्द भंडार विशेषज्ञ",topics:[
+      {name:"शब्द भंडार निर्माण",links:[{t:"शब्द शक्ति — दैनिक अभ्यास"},{t:"अंग्रेज़ी शब्द भंडार — BBC"},{t:"मूल शब्द और शब्द निर्माण"}]},
+      {name:"समानार्थी और विलोम",links:[{t:"समानार्थी — अभ्यास प्रश्न"},{t:"विलोम — पूरा सेट"},{t:"शब्द जोड़े — BBC"}]},
+      {name:"मुहावरे और वाक्यांश",links:[{t:"सामान्य अंग्रेज़ी मुहावरे"},{t:"मुहावरे अभ्यास"},{t:"100 महत्वपूर्ण वाक्यांश"}]},
+      {name:"वाक्य सुधार",links:[{t:"त्रुटि पहचान — अभ्यास"},{t:"वाक्य सुधार प्रश्न"},{t:"Para Jumbles अभ्यास"}]},
+    ]},
+    {bio:"साहित्य विशेषज्ञ · रचनात्मक लेखन",topics:[
+      {name:"एकार्थी शब्द",links:[{t:"एकार्थी शब्द — अभ्यास"},{t:"SSC/Bank स्तर के शब्द"},{t:"संदर्भ में शब्द भंडार"}]},
+      {name:"रिक्त स्थान भरें",links:[{t:"Cloze Test अभ्यास"},{t:"रिक्त स्थान — व्याकरण"},{t:"BBC संदर्भ में शब्द उपयोग"}]},
+      {name:"बोध और विश्लेषण",links:[{t:"परिच्छेद विश्लेषण तकनीक"},{t:"निष्कर्ष प्रश्न — अभ्यास"},{t:"आलोचनात्मक पठन कौशल"}]},
+    ]},
+  ]},
+  reasoning:{name:"तर्कशक्ति",desc:"तार्किक सोच और समस्या समाधान",teachers:[
+    {bio:"CAT 99.8 प्रतिशत · तर्क विशेषज्ञ",topics:[
+      {name:"कोडिंग और डिकोडिंग",links:[{t:"कोडिंग डिकोडिंग — पूरी अवधारणा"},{t:"अक्षर और संख्या कोडिंग"},{t:"कोडिंग अभ्यास प्रश्न"}]},
+      {name:"रक्त संबंध",links:[{t:"रक्त संबंध — अवधारणा और ट्रिक"},{t:"पारिवारिक वृक्ष समस्याएँ"},{t:"मिश्रित रक्त संबंध अभ्यास"}]},
+      {name:"दिशा बोध",links:[{t:"दिशा और दूरी समस्याएँ"},{t:"कम्पास दिशा अभ्यास"},{t:"परछाई और सूर्योदय दिशा"}]},
+      {name:"तार्किक पहेलियाँ",links:[{t:"बैठने की व्यवस्था पहेलियाँ"},{t:"मंजिल और बॉक्स पहेलियाँ"},{t:"जटिल व्यवस्था समस्याएँ"}]},
+    ]},
+    {bio:"UPSC उत्तीर्ण · मौखिक तर्क विशेषज्ञ",topics:[
+      {name:"न्यायवाक्य",links:[{t:"न्यायवाक्य — वेन डायग्राम विधि"},{t:"All Some No कथन"},{t:"न्यायवाक्य अभ्यास"}]},
+      {name:"संख्या श्रृंखला",links:[{t:"संख्या श्रृंखला — पैटर्न खोज"},{t:"लुप्त संख्या समस्याएँ"},{t:"अल्फा-न्यूमेरिक श्रृंखला"}]},
+      {name:"सादृश्यता",links:[{t:"शब्द सादृश्यता — अवधारणा"},{t:"अक्षर सादृश्यता समस्याएँ"},{t:"संख्या सादृश्यता अभ्यास"}]},
+      {name:"वर्गीकरण और विजातीय",links:[{t:"वर्गीकरण समस्याएँ"},{t:"विजातीय — अभ्यास"},{t:"गैर-मौखिक वर्गीकरण"}]},
+    ]},
+    {bio:"आलोचनात्मक सोच और निर्णय विश्लेषण",topics:[
+      {name:"कथन और मान्यताएँ",links:[{t:"कथन मान्यताएँ — अवधारणाएँ"},{t:"अंतर्निहित मान्यताएँ अभ्यास"},{t:"कथन और निष्कर्ष"}]},
+      {name:"कारण और प्रभाव",links:[{t:"कारण और प्रभाव प्रश्न"},{t:"कार्यवाई अभ्यास"},{t:"आलोचनात्मक तर्क गाइड"}]},
+      {name:"डेटा पर्याप्तता",links:[{t:"डेटा पर्याप्तता — GMAT शैली"},{t:"पर्याप्तता अभ्यास सेट"},{t:"Input Output तर्क"}]},
+    ]},
+  ]},
+  ssc:{name:"एसएससी परीक्षा",desc:"CGL · CHSL · CPO · MTS — भारत की शीर्ष सरकारी नौकरियाँ",teachers:[
+    {bio:"SSC गणित के किंग · 20 वर्ष का अनुभव",topics:[
+      {name:"संख्या पद्धति और HCF/LCM",links:[{t:"SSC 2025 गणित परिचय — पूर्ण कोर्स"},{t:"संख्या पद्धति — SSC 2025 बैच"},{t:"SSC 2025 पूर्ण गणित Playlist"}]},
+      {name:"प्रतिशत और लाभ/हानि",links:[{t:"Complete Percentage ONE SHOT — सभी परीक्षाएँ"},{t:"प्रतिशत — प्रथम बैच 2025"},{t:"प्रतिशत अभ्यास — SSC स्तर"}]},
+      {name:"बीजगणित और त्रिकोणमिति",links:[{t:"SSC CGL Mains 2024 — Algebra क्लास"},{t:"त्रिकोणमिति — Khan Academy"},{t:"बीजगणित मूल बातें"}]},
+      {name:"SSC CGL Mock Tests",links:[{t:"SSC CGL Free Mock Test — Selection Adda"},{t:"SSC CHSL Mock Test Series"},{t:"SSC CPO Mock Test Series"}]},
+    ]},
+    {bio:"अंग्रेज़ी विशेषज्ञ · SSC/Banking · व्याकरण की रानी",topics:[
+      {name:"SSC के लिए अंग्रेज़ी व्याकरण",links:[{t:"SSC CGL 2024 अंग्रेज़ी रणनीति"},{t:"भाषण के भाग — पूरी गाइड"},{t:"त्रुटि पहचान — SSC अभ्यास"}]},
+      {name:"शब्द भंडार और समानार्थी",links:[{t:"SSC CGL शब्द भंडार 2010-2023"},{t:"समानार्थी अभ्यास"},{t:"एकार्थी शब्द — SSC/Bank"}]},
+      {name:"Cloze Test और पठन",links:[{t:"Cloze Test अभ्यास"},{t:"RC तकनीक — SSC स्तर"},{t:"Para Jumbles अभ्यास"}]},
+    ]},
+    {bio:"तर्कशक्ति विशेषज्ञ · SSC/MTS/CGL",topics:[
+      {name:"न्यायवाक्य",links:[{t:"न्यायवाक्य Mock — SSC MTS/CGL 2024"},{t:"100/50 विधि से न्यायवाक्य"},{t:"न्यायवाक्य अभ्यास प्रश्न"}]},
+      {name:"रक्त संबंध और दिशा",links:[{t:"रक्त संबंध — SSC CGL & MTS 2024"},{t:"Complete रक्त संबंध — Quick Revision"},{t:"दिशा बोध समस्याएँ"}]},
+      {name:"SSC GD / MTS अभ्यास",links:[{t:"SSC GD Constable Mock Test"},{t:"SSC MTS Mock Test Series"},{t:"पहेली और बैठने की व्यवस्था"}]},
+    ]},
+  ]},
+  banking:{name:"बैंकिंग परीक्षा",desc:"SBI · IBPS · RBI — बैंकिंग क्षेत्र में सफलता",teachers:[
+    {bio:"Abhinay Maths · SSC और Banking Quant किंग",topics:[
+      {name:"सरलीकरण और सन्निकटन",links:[{t:"SSC CGL Speed and Selection — Abhinay Sir"},{t:"Abhinay Maths — पूरा चैनल"},{t:"सरलीकरण अभ्यास — Banking स्तर"}]},
+      {name:"लाभ हानि और डेटा व्याख्या",links:[{t:"Complete Profit and Loss — SSC CGL 2024"},{t:"Complete Algebra Marathon — SSC CGL 2024"},{t:"डेटा व्याख्या अभ्यास"}]},
+      {name:"चाल दूरी और समय",links:[{t:"Speed and Distance Hacks — Abhinay Sir"},{t:"कार्य और समय समस्याएँ"},{t:"पाइप नाव और ट्रेन"}]},
+      {name:"SBI and IBPS Mock Tests",links:[{t:"SBI Clerk Mock Test — Selection Adda"},{t:"IBPS PO Mock Test Series"},{t:"SBI PO Mock Test Series"}]},
+    ]},
+    {bio:"Banking तर्कशक्ति विशेषज्ञ · Puzzle and DI",topics:[
+      {name:"पहेलियाँ और बैठने की व्यवस्था",links:[{t:"Bank Exams 2024 — Syllogism Puzzle Blood Relation"},{t:"बैठने की व्यवस्था अभ्यास"},{t:"Floor and Box Puzzles"}]},
+      {name:"असमानताएँ और कोडिंग",links:[{t:"कोडिंग डिकोडिंग — पूरी अवधारणा"},{t:"संख्या और अक्षर श्रृंखला"},{t:"कथन और मान्यताएँ"}]},
+      {name:"IBPS and RBI Mocks",links:[{t:"IBPS Clerk Mock Test Series"},{t:"RBI Assistant Mock Test Series"},{t:"IBPS RRB PO Mock Test"}]},
+    ]},
+    {bio:"SSC और Banking English · शब्द भंडार विशेषज्ञ",topics:[
+      {name:"बैंकिंग अंग्रेज़ी व्याकरण",links:[{t:"CHSL and CGL English Vocabulary — Kiran Mam"},{t:"रिक्त स्थान — Bank स्तर"},{t:"वाक्य सुधार प्रश्न"}]},
+      {name:"समानार्थी विलोम और मुहावरे",links:[{t:"SSC CGL Pre — 2010-2023 के सभी Synonyms"},{t:"विलोम अभ्यास"},{t:"मुहावरे और वाक्यांश SSC/Bank"}]},
+    ]},
+  ]},
+  railways:{name:"रेलवे परीक्षा",desc:"RRB NTPC · Group D · ALP — रेलवे में करियर",teachers:[
+    {bio:"Abhinay Maths · Railway गणित और अभियोग्यता",topics:[
+      {name:"RRB NTPC के लिए गणित",links:[{t:"Railways Complete Algebra — Abhinay Sir"},{t:"Railway प्रतिशत और अनुपात"},{t:"RRB NTPC Mock Test Series"}]},
+      {name:"Railways Group D गणित",links:[{t:"संख्या पद्धति — Rakesh Yadav Sir"},{t:"समय कार्य और पाइप"},{t:"Railways Group D Mock Test"}]},
+    ]},
+    {bio:"GK और करंट अफेयर्स · UPSC और Railways",topics:[
+      {name:"Railways GK — इतिहास और संस्कृति",links:[{t:"1.5 वर्ष करंट अफेयर्स — इतिहास भाग 1"},{t:"1.5 वर्ष करंट अफेयर्स — इतिहास भाग 2"},{t:"भारतीय इतिहास — GKToday नोट्स"}]},
+      {name:"करंट अफेयर्स और विज्ञान",links:[{t:"करंट अफेयर्स भाग 5 — 2024"},{t:"करंट अफेयर्स भाग 6 — 2024"},{t:"GK Today करंट अफेयर्स"}]},
+      {name:"RRB ALP and Technician Mocks",links:[{t:"RRB ALP Mock Test Series"},{t:"RRB JE Mock Test Series"},{t:"RRB Technician Grade 3 Mock Test"}]},
+    ]},
+    {bio:"Railway तर्कशक्ति · Series Analogy और Puzzles",topics:[
+      {name:"श्रृंखला और सादृश्यता",links:[{t:"संख्या श्रृंखला — पैटर्न खोज"},{t:"अल्फा-न्यूमेरिक श्रृंखला अभ्यास"},{t:"शब्द सादृश्यता अभ्यास"}]},
+      {name:"कोडिंग दिशा और रक्त संबंध",links:[{t:"कोडिंग डिकोडिंग — पूरी अवधारणा"},{t:"रक्त संबंध — Quick Revision"},{t:"दिशा बोध समस्याएँ"}]},
+      {name:"RPF Constable and SI Mocks",links:[{t:"RPF Constable Mock Test"},{t:"RPF SI Mock Test Series"},{t:"Puzzle Test अभ्यास"}]},
+    ]},
+  ]},
+  gk:{name:"सामान्य ज्ञान",desc:"सामयिकी, इतिहास और विश्व ज्ञान",teachers:[
+    {bio:"UPSC सिविल सेवा · GK विशेषज्ञ",topics:[
+      {name:"सामयिकी",links:[{t:"दैनिक करंट अफेयर्स — GKToday"},{t:"मासिक करंट अफेयर्स PDF"},{t:"करंट अफेयर्स Quiz — अभ्यास"}]},
+      {name:"भारतीय राजव्यवस्था",links:[{t:"भारतीय संविधान — Complete"},{t:"संसद और मौलिक अधिकार"},{t:"राजव्यवस्था अभ्यास प्रश्न"}]},
+      {name:"भूगोल",links:[{t:"भारतीय भूगोल — Complete"},{t:"विश्व भूगोल की मूल बातें"},{t:"भूगोल अभ्यास — SSC स्तर"}]},
+      {name:"विज्ञान और प्रौद्योगिकी",links:[{t:"विज्ञान GK — महत्वपूर्ण विषय"},{t:"विज्ञान अभ्यास प्रश्न"},{t:"प्रौद्योगिकी करंट अफेयर्स"}]},
+    ]},
+    {bio:"इतिहास और संस्कृति · 18 वर्ष का अनुभव",topics:[
+      {name:"भारतीय इतिहास",links:[{t:"प्राचीन भारत — पूर्ण नोट्स"},{t:"मध्यकालीन और आधुनिक भारत"},{t:"इतिहास अभ्यास प्रश्न"}]},
+      {name:"भारतीय संस्कृति और कला",links:[{t:"भारतीय संस्कृति — कला और वास्तुकला"},{t:"शास्त्रीय नृत्य संगीत और त्योहार"},{t:"संस्कृति GK अभ्यास"}]},
+      {name:"खेल और पुरस्कार",links:[{t:"खेल GK — वर्तमान और ऐतिहासिक"},{t:"पुरस्कार और सम्मान — भारत और विश्व"},{t:"खेल अभ्यास प्रश्न"}]},
+    ]},
+    {bio:"अर्थशास्त्र और अंतर्राष्ट्रीय मामले विशेषज्ञ",topics:[
+      {name:"भारतीय अर्थव्यवस्था और बैंकिंग",links:[{t:"भारतीय अर्थव्यवस्था — मुख्य अवधारणाएँ"},{t:"बैंकिंग और वित्त की मूल बातें"},{t:"अर्थव्यवस्था अभ्यास — IBPS स्तर"}]},
+      {name:"अंतर्राष्ट्रीय संगठन",links:[{t:"UN WHO WTO और अन्य"},{t:"अंतर्राष्ट्रीय संबंध GK"},{t:"विश्व संगठन Quiz"}]},
+      {name:"पर्यावरण और पारिस्थितिकी",links:[{t:"पर्यावरण — मुख्य तथ्य"},{t:"जलवायु परिवर्तन और सम्मेलन"},{t:"पर्यावरण अभ्यास प्रश्न"}]},
+    ]},
+  ]},
+};
+
+// ─── HELPERS ───────────────────────────────────────────────────────────────
+function getSubjectData(key){
+  if(LANG==='hi'&&SUBJECTS_HI[key]){
+    const base=SUBJECTS[key],hi=SUBJECTS_HI[key];
+    return{...base,name:hi.name,desc:hi.desc,
+      teachers:base.teachers.map((t,ti)=>({...t,
+        bio:(hi.teachers[ti]&&hi.teachers[ti].bio)||t.bio,
+        topics:t.topics.map((tp,tpi)=>({...tp,
+          name:(hi.teachers[ti]&&hi.teachers[ti].topics[tpi]&&hi.teachers[ti].topics[tpi].name)||tp.name,
+          links:tp.links.map((l,li)=>({...l,
+            t:(hi.teachers[ti]&&hi.teachers[ti].topics[tpi]&&hi.teachers[ti].topics[tpi].links[li]&&hi.teachers[ti].topics[tpi].links[li].t)||l.t
+          }))
+        }))
+      }))
+    };
+  }
+  return SUBJECTS[key];
+}
+
+function tx(key){return(UI[LANG]||UI.en)[key]||key;}
+
+function setLang(lang){
+  LANG=lang;
+  ['login-lang-en','top-lang-en','t-lang-en','tp-lang-en','adm-lang-en'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',lang==='en');});
+  ['login-lang-hi','top-lang-hi','t-lang-hi','tp-lang-hi','adm-lang-hi'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',lang==='hi');});
+  const map={
+    'login-sub':tx('loginSub'),
+    'teachers-sub':tx('teachersSub'),
+    'topics-sub':tx('topicsSub'),
+    'admin-welcome-msg':tx('adminWelcome'),
+  };
+  Object.entries(map).forEach(([id,val])=>{const el=document.getElementById(id);if(el)el.textContent=val;});
+  const emailLabel=document.querySelector('.form-label');if(emailLabel)emailLabel.textContent=tx('emailLabel');
+  const emailInput=document.getElementById('login-email');if(emailInput)emailInput.placeholder=tx('emailPh');
+  const enterBtn=document.querySelector('.btn-primary');if(enterBtn)enterBtn.textContent=tx('enterBtn');
+  const chooseEl=document.querySelector('#page-subjects .welcome-block p');if(chooseEl)chooseEl.textContent=tx('chooseSubject');
+  const aiH=document.querySelector('.ai-header-text h3');if(aiH)aiH.textContent=tx('aiHeader');
+  const aiS=document.querySelector('.ai-header-text p');if(aiS)aiS.textContent=tx('aiSub');
+  const aiI=document.getElementById('ai-input');if(aiI)aiI.placeholder=tx('aiPh');
+  const prT=document.querySelector('#overall-progress h4');if(prT)prT.textContent=tx('progressTitle');
+  document.querySelectorAll('.logout-btn').forEach(b=>b.textContent=tx('leaveBtn'));
+  const activePage=document.querySelector('.page.active');
+  if(!activePage)return;
+  const pid=activePage.id;
+  if(pid==='page-subjects')renderSubjects();
+  else if(pid==='page-teachers'&&currentSubject){
+    const s=getSubjectData(currentSubject);
+    document.getElementById('teachers-title').textContent=s.icon+' '+s.name;
+    const grid=document.getElementById('teachers-grid');grid.innerHTML='';
+    s.teachers.forEach((t,i)=>{grid.innerHTML+=`<div class="teacher-card" onclick="openTeacher(${i})"><div class="t-avatar">${t.emoji}</div><div class="t-info"><h3>${t.name}</h3><p>${t.bio}</p><span class="t-badge">${t.topics.length} ${tx('teacherPill')}</span></div></div>`;});
+  }
+  else if(pid==='page-topics'&&currentSubject!==null&&currentTeacherIdx!==null)openTeacher(currentTeacherIdx);
+  else if(pid==='page-admin')renderAdmin();
+}
+
+// ─── ADMIN ────────────────────────────────────────────────────────────────
+function renderAdmin(){
+  let totalTeachers=0,totalTopics=0,totalLinks=0,ytLinks=0,saLinks=0,otherLinks=0;
+  Object.values(SUBJECTS).forEach(s=>s.teachers.forEach(t=>{totalTeachers++;t.topics.forEach(tp=>{totalTopics++;tp.links.forEach(l=>{totalLinks++;if(l.u.includes('youtube.com'))ytLinks++;else if(l.u.includes('selectionadda.in'))saLinks++;else otherLinks++;});})}));
+  const subjectCount=Object.keys(SUBJECTS).length;
+  document.getElementById('admin-stats').innerHTML=[
+    {num:subjectCount,label:'Subjects',color:'#E8916A'},
+    {num:totalTeachers,label:'Teachers',color:'#7BAE7F'},
+    {num:totalTopics,label:'Topics',color:'#9B89CC'},
+    {num:totalLinks,label:'Total Links',color:'#5EA8C0'},
+    {num:ytLinks,label:'YouTube Videos',color:'#FF0000'},
+    {num:saLinks,label:'Selection Adda Tests',color:'#2E7D32'},
+    {num:otherLinks,label:'Other Resources',color:'#E8B86D'},
+  ].map(c=>`<div class="stat-card" style="--c:${c.color}"><div class="stat-num">${c.num}</div><div class="stat-label">${c.label}</div></div>`).join('');
+  document.getElementById('admin-subjects-tree').innerHTML=Object.entries(SUBJECTS).map(([key,s])=>{
+    const teachers=s.teachers.map(t=>`<span class="admin-teacher-chip">${t.emoji} ${t.name}</span>`).join('');
+    const topicCount=s.teachers.reduce((a,t)=>a+t.topics.length,0);
+    const linkCount=s.teachers.reduce((a,t)=>t.topics.reduce((b,tp)=>b+tp.links.length,a),0);
+    return`<div class="admin-subject-row"><div class="admin-subj-icon">${s.icon}</div><div style="flex:1"><div class="admin-subj-name">${s.name}</div><div class="admin-subj-meta">${s.teachers.length} teachers · ${topicCount} topics · ${linkCount} links</div><div class="admin-teachers-list">${teachers}</div></div></div>`;
+  }).join('');
+  const ytRows=[],saRows=[],otherRows=[];
+  Object.entries(SUBJECTS).forEach(([key,s])=>s.teachers.forEach(t=>t.topics.forEach(tp=>tp.links.forEach(l=>{
+    const badge=l.u.includes('youtube')?'badge-yt':l.u.includes('selectionadda')?'badge-sa':'badge-ib';
+    const label=l.u.includes('youtube')?'▶ YT':l.u.includes('selectionadda')?'🏛 SA':'🔗';
+    const row=`<div class="admin-link-row"><span class="admin-link-badge ${badge}">${label}</span><div class="admin-link-title"><a href="${l.u}" target="_blank" rel="noopener">${l.t}</a></div><span class="admin-link-subject">${s.icon} ${t.name}</span></div>`;
+    if(l.u.includes('youtube.com'))ytRows.push(row);
+    else if(l.u.includes('selectionadda.in'))saRows.push(row);
+    else otherRows.push(row);
+  }))));
+  document.getElementById('admin-yt-links').innerHTML=ytRows.join('')||'<div class="admin-empty">No YouTube links.</div>';
+  document.getElementById('admin-sa-links').innerHTML=saRows.join('')||'<div class="admin-empty">No Selection Adda links.</div>';
+  document.getElementById('admin-other-links').innerHTML=otherRows.join('')||'<div class="admin-empty">No other links.</div>';
+}
+
+
+// ─────────────────────────────────────────
+// MOTIVATIONAL QUOTES
+// ─────────────────────────────────────────
+const QUOTES=[
+  {text:"आज की मेहनत, कल का सरकारी सफर। हार मत — तू बना है Selection के लिए! 🔥",author:"For every Govt. Job Aspirant"},
+  {text:"Every mock test you take today is one step closer to your selection letter tomorrow.",author:"Selection Adda Philosophy"},
+  {text:"अगर सपना सरकारी नौकरी है, तो नींद छोड़ो — पढ़ाई करो। Your time is NOW. ⏰",author:"SSC / Banking Aspirant Mantra"},
+  {text:"Consistency beats talent when talent doesn't stay consistent. Show up every single day. 💪",author:"Rakesh Yadav Sir"},
+  {text:"कमज़ोरी में भी पढ़ना — यही बनाता है Topper। Struggle today, Salary tomorrow. 🌟",author:"Study Grove Wisdom"},
+  {text:"Don't wish it were easier — wish you were better. Then go study one more chapter. 📚",author:"Study Grove"},
+  {text:"एक दिन सब रुकेगा, नौकरी नहीं। तब तक रुको मत। Selection पक्का होगा। ✅",author:"Every Selection Adda Topper"},
+  {text:"Your rank in the exam is decided today — not on exam day. How hard will you go? 🚀",author:"Study Grove"},
+];
+let currentQuote=0, quoteTimer=null;
+
+function initQuotes(){
+  const dots=document.getElementById('quote-dots');
+  if(!dots) return;
+  dots.innerHTML='';
+  QUOTES.forEach((_,i)=>{
+    const d=document.createElement('span');
+    d.className='q-dot'+(i===0?' active':'');
+    d.onclick=()=>showQuote(i);
+    dots.appendChild(d);
+  });
+  showQuote(0);
+  quoteTimer=setInterval(()=>showQuote((currentQuote+1)%QUOTES.length),5000);
+}
+
+function showQuote(idx){
+  currentQuote=idx;
+  const qt=document.getElementById('quote-text');
+  const qa=document.getElementById('quote-author');
+  if(qt) qt.textContent=QUOTES[idx].text;
+  if(qa) qa.textContent='— '+QUOTES[idx].author;
+  document.querySelectorAll('.q-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+}
+
+// ─────────────────────────────────────────
+// PROGRESS TRACKER
+// ─────────────────────────────────────────
+const progress={};
+
+function progressKey(subjectKey,teacherName,topicName){
+  return subjectKey+'|'+teacherName+'|'+topicName;
+}
+
+function toggleTopicDone(subjectKey,teacherName,topicName){
+  const key=progressKey(subjectKey,teacherName,topicName);
+  progress[key]=!progress[key];
+  const btn=document.getElementById('done-btn-'+CSS.escape(key));
+  if(btn){
+    btn.classList.toggle('done',progress[key]);
+    btn.textContent=progress[key]?tx('doneTxt'):tx('markDone');
+  }
+  // Refresh topic icon
+  if(currentSubject&&currentTeacherIdx!==null) openTeacher(currentTeacherIdx);
+  refreshTeacherProgressBar();
+  refreshOverallProgress();
+}
+
+function getSubjectStats(subjectKey){
+  const s=SUBJECTS[subjectKey];
+  let total=0,done=0;
+  s.teachers.forEach(t=>t.topics.forEach(tp=>{
+    total++;
+    if(progress[progressKey(subjectKey,t.name,tp.name)]) done++;
+  }));
+  return{total,done,pct:total?Math.round(done/total*100):0};
+}
+
+function refreshOverallProgress(){
+  const keys=Object.keys(SUBJECTS);
+  const anyProgress=keys.some(k=>getSubjectStats(k).done>0);
+  const panel=document.getElementById('overall-progress');
+  if(!panel) return;
+  panel.style.display=anyProgress?'block':'none';
+  const rows=document.getElementById('progress-rows');
+  if(!rows) return;
+  rows.innerHTML=keys.map(k=>{
+    const s=SUBJECTS[k];
+    const{done,total,pct}=getSubjectStats(k);
+    return '<div class="prog-row"><span class="prog-label">'+s.icon+' '+s.name+'</span><div class="prog-track"><div class="prog-fill" style="width:'+pct+'%"></div></div><span class="prog-pct">'+done+'/'+total+'</span></div>';
+  }).join('');
+}
+
+function refreshTeacherProgressBar(){
+  const el=document.getElementById('teacher-progress-bar');
+  if(!el||currentSubject===null||currentTeacherIdx===null) return;
+  const t=SUBJECTS[currentSubject].teachers[currentTeacherIdx];
+  const total=t.topics.length;
+  const done=t.topics.filter(tp=>progress[progressKey(currentSubject,t.name,tp.name)]).length;
+  const pct=total?Math.round(done/total*100):0;
+  el.innerHTML='<div class="progress-bar-wrap" style="padding:14px 20px;margin-bottom:0"><div class="prog-row"><span class="prog-label" style="width:auto;margin-right:8px;font-size:.85rem">'+tx('topicsComp')+'</span><div class="prog-track"><div class="prog-fill" style="width:'+pct+'%"></div></div><span class="prog-pct" style="margin-left:8px">'+done+'/'+total+'</span></div></div>';
+}
+
+// ─────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────
+let currentSubject=null;
+let currentTeacherIdx=null;
+
+// ─────────────────────────────────────────
+// BACKGROUND EFFECTS
+// ─────────────────────────────────────────
+(function initBg(){
+  const cc=document.getElementById('clouds');
+  [{w:220,h:70,top:'8%',delay:0,dur:55,op:.5},{w:160,h:50,top:'18%',delay:12,dur:72,op:.38},
+   {w:300,h:90,top:'5%',delay:25,dur:90,op:.3},{w:130,h:45,top:'30%',delay:8,dur:64,op:.42},
+   {w:200,h:65,top:'22%',delay:40,dur:80,op:.35}].forEach(d=>{
+    const el=document.createElement('div');
+    el.className='cloud';
+    el.style.cssText='width:'+d.w+'px;height:'+d.h+'px;top:'+d.top+';left:-250px;opacity:'+d.op+';animation-duration:'+d.dur+'s;animation-delay:-'+d.delay+'s';
+    cc.appendChild(el);
+  });
+  const lc=document.getElementById('leaves');
+  const lEmojis=['🍃','🌿','🍀','🌱','✨','🌸','⭐','🍂'];
+  for(let i=0;i<18;i++){
+    const l=document.createElement('div');
+    l.className='leaf';
+    l.textContent=lEmojis[Math.floor(Math.random()*lEmojis.length)];
+    l.style.cssText='left:'+Math.random()*100+'vw;font-size:'+(0.7+Math.random()*.9)+'rem;animation-duration:'+(9+Math.random()*14)+'s;animation-delay:-'+(Math.random()*18)+'s';
+    lc.appendChild(l);
+  }
+})();
+
+// ─────────────────────────────────────────
+// NAVIGATION
+// ─────────────────────────────────────────
+function goPage(id){
+  document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active');p.style.display='none';});
+  const pg=document.getElementById('page-'+id);
+  if(!pg) return;
+  pg.classList.add('active');
+  pg.style.display=(id==='login')?'flex':'block';
+  if(id==='admin') renderAdmin();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ─────────────────────────────────────────
+// LOGIN
+// ─────────────────────────────────────────
+document.getElementById('login-email').addEventListener('keydown',function(e){if(e.key==='Enter')handleLogin();});
+
+function handleLogin(){
+  const email=document.getElementById('login-email').value.trim();
+  const err=document.getElementById('login-err');
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    err.style.display='block';
+    document.getElementById('login-email').style.borderColor='#E05A5A';
+    return;
+  }
+  err.style.display='none';
+  document.getElementById('login-email').style.borderColor='';
+  isAdmin=(email.toLowerCase()===ADMIN_EMAIL);
+  const name=email.split('@')[0];
+  document.getElementById('user-chip').innerHTML='🍃 '+name;
+  const h=new Date().getHours();
+  const greet=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+  document.getElementById('welcome-msg').textContent=greet+', '+name+'! ✨';
+  if(isAdmin){
+    renderSubjects();
+    renderAdmin();
+    goPage('admin');
+  } else {
+    initQuotes();
+    renderSubjects();
+    goPage('subjects');
+  }
+}
+
+function goLogout(){
+  document.getElementById('login-email').value='';
+  if(quoteTimer){clearInterval(quoteTimer);quoteTimer=null;}
+  const qd=document.getElementById('quote-dots');
+  if(qd) qd.innerHTML='';
+  isAdmin=false;
+  goPage('login');
+}
+
+// ─────────────────────────────────────────
+// SUBJECTS
+// ─────────────────────────────────────────
+function renderSubjects(){
+  const grid=document.getElementById('subjects-grid');
+  if(!grid) return;
+  grid.innerHTML='';
+  Object.keys(SUBJECTS).forEach(key=>{
+    const s=getSubjectData(key);
+    const base=SUBJECTS[key];
+    const tCount=base.teachers.length;
+    const topCount=base.teachers.reduce((a,t)=>a+t.topics.length,0);
+    const{done,pct}=getSubjectStats(key);
+    const progHtml=done>0?'<div class="subject-prog">🌿 '+pct+'% '+(LANG==='hi'?'पूर्ण':'complete')+' ('+done+'/'+topCount+' '+(LANG==='hi'?'विषय':'topics')+')</div>':'';
+    grid.innerHTML+='<div class="subject-card" style="--c:'+base.color+'" onclick="openSubject(\''+key+'\')"><span class="subject-icon">'+base.icon+'</span><div class="subject-name">'+s.name+'</div><div class="subject-desc">'+s.desc+'</div><span class="subject-pill">'+tCount+' '+(LANG==='hi'?'शिक्षक':'Teachers')+' · '+topCount+' '+(LANG==='hi'?'विषय':'Topics')+'</span>'+progHtml+'</div>';
+  });
+  refreshOverallProgress();
+}
+
+// ─────────────────────────────────────────
+// TEACHERS
+// ─────────────────────────────────────────
+function openSubject(key){
+  currentSubject=key;
+  const s=getSubjectData(key);
+  document.getElementById('teachers-title').textContent=s.icon+' '+s.name;
+  const sub=document.getElementById('teachers-sub');
+  if(sub) sub.textContent=tx('teachersSub');
+  const grid=document.getElementById('teachers-grid');
+  grid.innerHTML='';
+  s.teachers.forEach((t,i)=>{
+    grid.innerHTML+='<div class="teacher-card" onclick="openTeacher('+i+')"><div class="t-avatar">'+t.emoji+'</div><div class="t-info"><h3>'+t.name+'</h3><p>'+t.bio+'</p><span class="t-badge">'+t.topics.length+' '+tx('teacherPill')+'</span></div></div>';
+  });
+  goPage('teachers');
+}
+
+// ─────────────────────────────────────────
+// TOPICS
+// ─────────────────────────────────────────
+function openTeacher(idx){
+  currentTeacherIdx=idx;
+  const subj=getSubjectData(currentSubject);
+  const t=subj.teachers[idx];
+  const origT=SUBJECTS[currentSubject].teachers[idx];
+  const titleEl=document.getElementById('topics-title');
+  if(titleEl) titleEl.textContent=t.name;
+  const subEl=document.getElementById('topics-sub');
+  if(subEl) subEl.textContent=tx('topicsSub');
+
+  document.getElementById('teacher-hero').innerHTML='<div class="teacher-hero"><div class="hero-avatar">'+t.emoji+'</div><div class="hero-info"><h2>'+t.name+'</h2><p>'+t.bio+'</p><div class="hero-badge">'+SUBJECTS[currentSubject].icon+' '+subj.name+' · '+t.topics.length+' '+(LANG==='hi'?'विषय':'Topics')+'</div></div></div>';
+
+  document.getElementById('topics-list').innerHTML=t.topics.map((tp,ti)=>{
+    const origTpName=origT.topics[ti].name;
+    const key=progressKey(currentSubject,origT.name,origTpName);
+    const isDone=!!progress[key];
+    const safeId='done-btn-'+CSS.escape(key);
+    const origTName=origT.name.replace(/'/g,"\'");
+    const origTpNameEsc=origTpName.replace(/'/g,"\'");
+    return '<div class="topic-card" id="tc-'+ti+'"><div class="topic-head" onclick="toggleTopic('+ti+')"><h3>'+(isDone?'✅':tp.icon)+' '+tp.name+'</h3><span class="topic-arrow">▶</span></div><div class="topic-links">'+
+      tp.links.map(l=>'<a class="link-item" href="'+l.u+'" target="_blank" rel="noopener noreferrer"><div class="link-dot">🔗</div><div class="link-text"><strong>'+l.t+'</strong><span>'+l.p+'</span></div></a>').join('')+
+      '<div style="margin-top:10px;text-align:right"><button class="topic-done-btn'+(isDone?' done':'')+'" id="'+safeId+'" onclick="event.stopPropagation();toggleTopicDone(\''+currentSubject+'\',\''+origTName+'\',\''+origTpNameEsc+'\')">'+(isDone?tx('doneTxt'):tx('markDone'))+'</button></div></div></div>';
+  }).join('');
+
+  refreshTeacherProgressBar();
+  goPage('topics');
+}
+
+function toggleTopic(idx){
+  document.getElementById('tc-'+idx).classList.toggle('open');
+}
+
+// ─────────────────────────────────────────
+// AI ASSISTANT — KODAMA
+// ─────────────────────────────────────────
+function toggleAI(){
+  const p=document.getElementById('ai-panel');
+  p.classList.toggle('open');
+  if(p.classList.contains('open')) document.getElementById('ai-input').focus();
+}
+
+// ─── Navigate to exact topic page & open the accordion ───────────────────────
+function goToTopic(subjectKey, teacherIdx, topicIdx){
+  // Close AI panel smoothly first
+  const panel=document.getElementById('ai-panel');
+  if(panel) panel.classList.remove('open');
+  // Navigate: subject → teacher → topics page
+  openSubject(subjectKey);
+  openTeacher(teacherIdx);
+  // After DOM renders, open the correct accordion and scroll to it
+  setTimeout(()=>{
+    const tc=document.getElementById('tc-'+topicIdx);
+    if(tc){
+      if(!tc.classList.contains('open')) tc.classList.add('open');
+      setTimeout(()=>tc.scrollIntoView({behavior:'smooth',block:'center'}),60);
+    }
+  },120);
+}
+
+function sendAI(){
+  const inp=document.getElementById('ai-input');
+  const q=inp.value.trim();
+  if(!q) return;
+  addMsg(q,'user');
+  inp.value='';
+  const typingId='typing-'+Date.now();
+  addMsg('<em>'+(LANG==='hi'?'कोडामा खोज रहा है…':'Kodama is searching the grove…')+' 🌿</em>','ai',true,typingId);
+  setTimeout(()=>{
+    const el=document.getElementById(typingId);
+    if(el){const html=aiSearch(q);el.innerHTML=html;}
+    const msgs=document.getElementById('ai-msgs');
+    msgs.scrollTop=msgs.scrollHeight;
+  },500);
+}
+
+function addMsg(content,type,isHtml,id){
+  const msgs=document.getElementById('ai-msgs');
+  const d=document.createElement('div');
+  d.className='msg '+type;
+  if(id) d.id=id;
+  if(isHtml) d.innerHTML=content; else d.textContent=content;
+  msgs.appendChild(d);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+function aiSearch(query){
+  const q=query.toLowerCase().trim();
+  const hits=[];
+
+  for(const[sk,s]of Object.entries(SUBJECTS)){
+    // Subject-level match → open that subject's teachers page
+    const hiName=SUBJECTS_HI[sk]&&SUBJECTS_HI[sk].name?SUBJECTS_HI[sk].name:'';
+    if(s.name.toLowerCase().includes(q)||hiName.includes(q)){
+      const list=s.teachers.map((t,ti)=>'<button class="ai-nav-btn" style="margin:3px" onclick="openSubject(\''+sk+'\');document.getElementById(\'ai-panel\').classList.remove(\'open\')">'+t.emoji+' '+t.name+'</button>').join('');
+      return '✨ Found subject <strong>'+s.name+'</strong>! Choose a teacher:<br><br>'+list+
+             '<br><br><em style="font-size:.78rem;color:var(--text-light)">Click any teacher to open their topic page 🍃</em>';
+    }
+
+    s.teachers.forEach((t,ti)=>{
+      const tMatch=t.name.toLowerCase().includes(q);
+      t.topics.forEach((tp,tpi)=>{
+        const hiTopicName=(SUBJECTS_HI[sk]&&SUBJECTS_HI[sk].teachers[ti]&&SUBJECTS_HI[sk].teachers[ti].topics[tpi])?SUBJECTS_HI[sk].teachers[ti].topics[tpi].name:'';
+        const topMatch=tp.name.toLowerCase().includes(q)||hiTopicName.toLowerCase().includes(q);
+        const lMatch=tp.links.some(lk=>lk.t.toLowerCase().includes(q)||lk.p.toLowerCase().includes(q));
+        if(tMatch||topMatch||lMatch) hits.push({sk,s,t,ti,tp,tpi});
+      });
+    });
+  }
+
+  if(!hits.length) return '🌱 No results for <strong>"'+query+'"</strong>…<br><br>Try topics like:<br>\u{1F4D0} <em>Algebra, Trigonometry</em><br>\u{1F3DB}️ <em>Percentage, SSC, Rakesh Yadav</em><br>\u{1F3E6} <em>Syllogism, Banking, Abhinay</em><br>\u{1F686} <em>Railways, Current Affairs</em> ✨';
+
+  // Deduplicate by subject+teacher+topic
+  const groups={};
+  for(const h of hits){
+    const k=h.sk+'|'+h.ti+'|'+h.tpi;
+    if(!groups[k]) groups[k]=h;
+  }
+  const allEntries=Object.values(groups);
+  const entries=allEntries.slice(0,6);
+
+  // Single exact match → auto-navigate immediately
+  if(allEntries.length===1){
+    const e=allEntries[0];
+    setTimeout(()=>goToTopic(e.sk,e.ti,e.tpi),350);
+    return '\U0001F33F Opening <strong>'+e.tp.name+'</strong> by <strong>'+e.t.name+'</strong> for you! ✨<br><br><em style="font-size:.78rem;color:var(--text-light)">All links are waiting for you on that page \U0001F4D6</em>';
+  }
+
+  // Multiple matches → show navigation cards
+  let out='✨ Found <strong>'+allEntries.length+'</strong> result'+(allEntries.length!==1?'s':'')+' for <em>"'+query+'"</em>! \U0001F33F<br><br>';
+  entries.forEach(e=>{
+    out+='<div style="background:rgba(232,184,109,.1);border-radius:13px;padding:10px 12px;margin-bottom:9px">'+
+         '<div class="r-teacher">'+e.t.emoji+' '+e.t.name+'</div>'+
+         '<div class="r-subject">'+e.s.icon+' '+e.s.name+' \xb7 '+e.tp.icon+' '+e.tp.name+'</div>'+
+         '<button class="ai-nav-btn" onclick="goToTopic(\''+e.sk+'\','+e.ti+','+e.tpi+')">→ Open this topic &amp; all links</button>'+
+         '</div>';
+  });
+  if(allEntries.length>6) out+='<em style="font-size:.78rem;color:var(--text-light)">…and '+(allEntries.length-6)+' more — try a more specific search! \U0001F331</em><br>';
+  out+='<br><em style="font-size:.78rem;color:var(--text-light)">Click a button to jump straight to that topic \U0001F343</em>';
+  return out;
+}
+
+</script>
+</body>
+</html>
